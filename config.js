@@ -1,1 +1,3 @@
-export const BACKEND = "http://localhost:4000";
+export const BACKEND = 
+process.env.NEXT_PUBLIC_BACKEND_URL ||
+"https://localhost:4000";
