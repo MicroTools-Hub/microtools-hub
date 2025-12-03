@@ -9,6 +9,11 @@ export default function Home() {
     { name: "Image Compressor", link: "/tools/image-compressor", icon: "🖼️" },
     { name: "File Converter", link: "/tools/file-converter", icon: "🔄" },
     { name: "Meme Generator", link: "/tools/meme", icon: "😂" },
+    { name: "Password Generator", link: "/tools/password", icon: "🔐" },
+    { name: "Quote Generator", link: "/tools/quotes", icon: "💬" },
+    { name: "Emoji Translator", link: "/tools/emoji", icon: "😎" },
+    { name: "Text Summarizer", link: "/tools/summarizer", icon: "📝" },
+    { name: "File Compressor", link: "/tools/file-compressor", icon: "📦" },
   ];
 
   return (
@@ -22,8 +27,6 @@ export default function Home() {
 
         {/* 🌟 HERO SECTION */}
         <section className="relative text-center px-6 py-24 overflow-hidden">
-          
-          {/* Glowing Background */}
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/20 via-purple-500/20 to-pink-400/20 blur-3xl opacity-40"></div>
 
           <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 relative drop-shadow-lg">
@@ -36,7 +39,6 @@ export default function Home() {
             and more — all in one place.
           </p>
 
-          {/* CTA Buttons */}
           <div className="mt-10 flex justify-center gap-4 relative">
             <Link href="/tools">
               <button className="px-8 py-3 bg-indigo-600 text-white rounded-xl text-lg font-medium shadow-lg hover:bg-indigo-700 transition">
@@ -55,7 +57,7 @@ export default function Home() {
         {/* ⭐ FEATURED TOOLS */}
         <section id="featured" className="px-6 mt-10 mb-20">
           <h2 className="text-4xl font-bold text-indigo-600 text-center mb-8">
-            Popular Tools
+            All Tools
           </h2>
 
           <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -117,33 +119,10 @@ export default function Home() {
           </ol>
         </section>
 
-        {/* 📘 FAQ */}
-        <section className="max-w-4xl mx-auto px-6 my-20">
-          <h2 className="text-4xl font-bold text-indigo-600 text-center mb-6">
-            Frequently Asked Questions
-          </h2>
-
-          <div className="space-y-6 text-gray-700">
-            <div>
-              <h3 className="font-semibold text-lg">Is everything really free?</h3>
-              <p>Yes — all major tools are fully free.</p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-lg">Do you store files?</h3>
-              <p>No. Everything is temporary and auto-deleted.</p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-lg">Does this work on mobile?</h3>
-              <p>Absolutely — perfect mobile support.</p>
-            </div>
-          </div>
-        </section>
-
       </main>
     </>
   );
 }
+
 
 
