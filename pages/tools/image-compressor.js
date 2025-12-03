@@ -41,21 +41,22 @@ export default function ImageCompressor() {
     formData.append("quality", quality);
 
     try {
-
-    const res = await fetch(`${BACKEND}/image/compress`, {
-    method: "POST",
-    body: formData,
-    });
-
+      // Correct backend route
+      const res = await fetch(`${BACKEND}/api/image-compress`, {
+        method: "POST",
+        body: formData,
+      });
 
       if (!res.ok) {
+        const txt = await res.text();
+        console.error("Backend error:", txt);
         throw new Error("Compression failed. Try again.");
       }
 
       const zipBlob = await res.blob();
       setResults(URL.createObjectURL(zipBlob));
     } catch (err) {
-      setError(err.message);
+      setError(err.message || "Unknown error occurred.");
     }
 
     setLoading(false);
@@ -172,4 +173,5 @@ export default function ImageCompressor() {
     </>
   );
 }
+
 

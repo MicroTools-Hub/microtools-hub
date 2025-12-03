@@ -61,10 +61,10 @@ export default function EmojiTranslator() {
     // misc / emotive
     party: "🥳", gift: "🎁", help: "🆘", idea: "💡",
     thumbs: "👍", clap: "👏", pray: "🙏", kiss: "😘",
-    bug: "🐞", clock: "⏰", camera: "📸",
+    bug: "🐞", clock: "⏰", photo: "📸",
 
     // tech / web
-    code: "💻", bug: "🐛", server: "🖥️", cloudcomp: "☁️",
+    code: "💻", bug2: "🐛", server: "🖥️", cloudcomp: "☁️",
 
     // extended short forms
     brb: "⏳", asap: "⚡", gg: "🎮", hmm: "🤔",

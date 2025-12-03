@@ -8,9 +8,6 @@ export default function ShortsDownloader() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Internal API (works on VPS / local / production)
-  const API = "/api/youtube";
-
   const resolutions = ["144p", "240p", "360p", "480p", "720p", "1080p"];
 
   const fetchVideo = async () => {
@@ -25,18 +22,19 @@ export default function ShortsDownloader() {
     setLoading(true);
 
     try {
-      const res = await fetch(`${BACKEND}/youtube/shorts`, {
-     method: "POST",
-     headers: { "Content-Type": "application/json" },
-     body: JSON.stringify({ url }),
-    });
-
+      // ✅ Correct backend route
+      const res = await fetch(`${BACKEND}/api/youtube`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url }),
+      });
 
       const data = await res.json();
 
       if (data.error) setError(data.error);
       else setInfo(data);
-    } catch {
+    } catch (err) {
+      console.error("YouTube Fetch Error:", err);
       setError("Failed to connect to server. Try again later.");
     }
 
@@ -110,7 +108,6 @@ export default function ShortsDownloader() {
               className="w-60 rounded mb-4 shadow"
             />
 
-            {/* Download buttons */}
             <div className="space-y-3">
               {resolutions.map((res) =>
                 info.links?.[res] ? (
@@ -130,6 +127,7 @@ export default function ShortsDownloader() {
     </>
   );
 }
+
 
 
 

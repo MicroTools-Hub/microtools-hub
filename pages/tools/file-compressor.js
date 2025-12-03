@@ -45,34 +45,40 @@ export default function FileCompressor() {
       return;
     }
 
-    setLoading(true);
-    setProgress(20);
+    try {
+      setLoading(true);
+      setProgress(20);
 
-    const form = new FormData();
-    form.append("file", file);
-    form.append("level", level);
+      const form = new FormData();
+      form.append("file", file);
+      form.append("level", level);
 
-    // ...
+      // Correct backend route
+      const res = await fetch(`${BACKEND}/api/file-compress`, {
+        method: "POST",
+        body: form,
+      });
 
-    const res = await fetch(`${BACKEND}/file/compress`, {
-    method: "POST",
-    body: form,
-    });
+      setProgress(70);
 
+      if (!res.ok) {
+        const txt = await res.text();
+        console.error("Backend error:", txt);
+        alert("Compression failed. Try again.");
+        setLoading(false);
+        return;
+      }
 
-    setProgress(70);
+      const blob = await res.blob();
+      setDownloadUrl(URL.createObjectURL(blob));
 
-    if (!res.ok) {
-      alert("Compression failed. Try a different file.");
+      setProgress(100);
+    } catch (error) {
+      console.error("Upload error:", error);
+      alert("Cannot connect to backend. Is it running?");
+    } finally {
       setLoading(false);
-      return;
     }
-
-    const blob = await res.blob();
-    setDownloadUrl(URL.createObjectURL(blob));
-
-    setProgress(100);
-    setLoading(false);
   };
 
   return (
@@ -171,7 +177,9 @@ export default function FileCompressor() {
 
         {/* FAQ Section */}
         <section className="mt-12 p-4 bg-white border rounded-xl shadow">
-          <h2 className="text-2xl font-bold text-indigo-600 mb-4">Frequently Asked Questions</h2>
+          <h2 className="text-2xl font-bold text-indigo-600 mb-4">
+            Frequently Asked Questions
+          </h2>
 
           <div className="space-y-4 text-gray-700 leading-7">
             <div>
@@ -182,8 +190,7 @@ export default function FileCompressor() {
             <div>
               <h3 className="font-semibold">What does compression do?</h3>
               <p>
-                It reduces file size by optimizing content while keeping quality
-                as high as possible.
+                It reduces file size by optimizing content while keeping quality as high as possible.
               </p>
             </div>
 
@@ -204,6 +211,7 @@ export default function FileCompressor() {
     </>
   );
 }
+
 
 
 

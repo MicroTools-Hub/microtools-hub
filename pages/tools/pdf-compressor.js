@@ -19,22 +19,28 @@ export default function PDFCompressor() {
     formData.append("file", file);
     formData.append("level", level);
 
-    // ...
+    try {
+      // ✅ Correct backend route
+      const res = await fetch(`${BACKEND}/api/pdf-compress`, {
+        method: "POST",
+        body: formData,
+      });
 
-    const res = await fetch(`${BACKEND}/pdf/compress`, {
-    method: "POST",
-    body: formData,
-    });
+      if (!res.ok) {
+        const txt = await res.text();
+        console.error("Backend error:", txt);
+        alert("Compression failed. Try again!");
+        setLoading(false);
+        return;
+      }
 
-
-    if (!res.ok) {
-      alert("Compression failed. Try again!");
-      setLoading(false);
-      return;
+      const blob = await res.blob();
+      setDownloadUrl(URL.createObjectURL(blob));
+    } catch (err) {
+      console.error("PDF Compression Error:", err);
+      alert("Unable to reach backend. Is the server running?");
     }
 
-    const blob = await res.blob();
-    setDownloadUrl(URL.createObjectURL(blob));
     setLoading(false);
   };
 
@@ -83,10 +89,7 @@ export default function PDFCompressor() {
           onDragLeave={() => setDragging(false)}
           onDrop={handleDrop}
         >
-          <p className="text-center text-gray-600 mb-3">
-            Drag & drop your PDF here
-          </p>
-
+          <p className="text-center text-gray-600 mb-3">Drag & drop your PDF here</p>
           <p className="text-center text-gray-400 mb-4">or</p>
 
           <input
@@ -164,6 +167,7 @@ export default function PDFCompressor() {
     </>
   );
 }
+
 
 
 

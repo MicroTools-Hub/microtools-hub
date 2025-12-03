@@ -8,9 +8,6 @@ export default function YouTubeDownloader() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Internal API endpoint (works on VPS + local)
-  const API = "/api/youtube";
-
   const resolutions = ["144p", "240p", "360p", "480p", "720p", "1080p"];
 
   const fetchVideo = async () => {
@@ -25,18 +22,19 @@ export default function YouTubeDownloader() {
     setLoading(true);
 
     try {
-      const res = await fetch(`${BACKEND}/youtube/video`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ url }),
+      // ✅ Correct backend route
+      const res = await fetch(`${BACKEND}/api/youtube`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url }),
       });
-
 
       const data = await res.json();
 
       if (data.error) setError(data.error);
       else setInfo(data);
-    } catch {
+    } catch (err) {
+      console.error("YOUTUBE FETCH ERROR:", err);
       setError("Failed to connect to server. Try again later.");
     }
 
@@ -130,6 +128,7 @@ export default function YouTubeDownloader() {
     </>
   );
 }
+
 
 
 

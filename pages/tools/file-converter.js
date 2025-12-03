@@ -37,26 +37,29 @@ export default function FileConverter() {
 
     setLoading(true);
     setError("");
-    
+
     const form = new FormData();
     form.append("file", file);
     form.append("target", targetType);
 
     try {
-    const res = await fetch(`${BACKEND}/file/convert`, {
-    method: "POST",
-    body: fd,
-    });
-
+      // Correct backend route
+      const res = await fetch(`${BACKEND}/api/file-convert`, {
+        method: "POST",
+        body: form,
+      });
 
       if (!res.ok) {
+        const txt = await res.text();
+        console.error("Backend error:", txt);
         throw new Error("Conversion failed. Try another file.");
       }
 
       const blob = await res.blob();
       setDownloadUrl(URL.createObjectURL(blob));
     } catch (err) {
-      setError(err.message);
+      setError(err.message || "Unknown error occurred.");
+      console.error("CONVERSION ERROR:", err);
     }
 
     setLoading(false);
@@ -76,9 +79,7 @@ export default function FileConverter() {
           Universal File Converter
         </h1>
 
-        {/* ===================== */}
-        {/* 🔵 How to Use Section */}
-        {/* ===================== */}
+        {/* How to Use */}
         <div className="p-5 bg-white shadow rounded-xl border mb-8">
           <h2 className="font-semibold text-lg mb-2">How to Use</h2>
           <ul className="list-disc ml-6 text-gray-700 leading-7">
@@ -89,9 +90,7 @@ export default function FileConverter() {
           </ul>
         </div>
 
-        {/* ===================== */}
-        {/* 🔵 Upload Box */}
-        {/* ===================== */}
+        {/* Upload Box */}
         <div
           onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
           onDragLeave={() => setDragActive(false)}
@@ -104,9 +103,7 @@ export default function FileConverter() {
         >
           <CloudArrowUpIcon className="w-16 h-16 text-indigo-600 mx-auto mb-3" />
 
-          <p className="text-gray-700 font-medium">
-            Drag & Drop your file here
-          </p>
+          <p className="text-gray-700 font-medium">Drag & Drop your file here</p>
           <p className="text-gray-500 text-sm mb-4">or click to browse</p>
 
           <input
@@ -117,8 +114,7 @@ export default function FileConverter() {
 
           {file && (
             <p className="mt-3 text-gray-700 text-sm">
-              <strong>Selected:</strong> {file.name} (
-              {(file.size / 1024 / 1024).toFixed(2)} MB)
+              <strong>Selected:</strong> {file.name} ({(file.size / 1024 / 1024).toFixed(2)} MB)
             </p>
           )}
         </div>
@@ -128,9 +124,7 @@ export default function FileConverter() {
           <p className="text-red-600 mt-3 font-medium">{error}</p>
         )}
 
-        {/* ===================== */}
-        {/* 🔵 Format Selector */}
-        {/* ===================== */}
+        {/* Format Selector */}
         <div className="mt-6">
           <label className="font-medium mr-2">Convert to:</label>
           <select
@@ -139,16 +133,12 @@ export default function FileConverter() {
             className="border p-2 rounded"
           >
             {outputTypes.map((type) => (
-              <option key={type} value={type}>
-                {type.toUpperCase()}
-              </option>
+              <option key={type} value={type}>{type.toUpperCase()}</option>
             ))}
           </select>
         </div>
 
-        {/* ===================== */}
-        {/* 🔵 Convert Button */}
-        {/* ===================== */}
+        {/* Convert Button */}
         <button
           onClick={convertFile}
           className="w-full mt-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg transition"
@@ -156,9 +146,7 @@ export default function FileConverter() {
           {loading ? "Converting..." : "Convert File"}
         </button>
 
-        {/* ===================== */}
-        {/* 🔵 Download Button */}
-        {/* ===================== */}
+        {/* Download Button */}
         {downloadUrl && (
           <div className="mt-8 text-center">
             <a
@@ -174,5 +162,6 @@ export default function FileConverter() {
     </>
   );
 }
+
 
 
