@@ -17,7 +17,6 @@ export default function FileConverter() {
     "mp4", "mp3", "wav"
   ];
 
-  // 🔵 Handle file drop
   const handleDrop = (e) => {
     e.preventDefault();
     setDragActive(false);
@@ -28,7 +27,6 @@ export default function FileConverter() {
     }
   };
 
-  // 🔥 Convert file
   const convertFile = async () => {
     if (!file) {
       setError("Please upload a file to convert.");
@@ -43,7 +41,6 @@ export default function FileConverter() {
     form.append("target", targetType);
 
     try {
-      // Correct backend route
       const res = await fetch(`${BACKEND}/api/file-convert`, {
         method: "POST",
         body: form,
@@ -67,19 +64,77 @@ export default function FileConverter() {
 
   return (
     <>
+      {/* 🌟 ENTERPRISE-GRADE SEO UPGRADE */}
       <SEO
-        title="Universal File Converter — Convert Any Format Online | MicroTools Hub"
-        description="Convert PDF, DOCX, PPTX, XLSX, MP4, MP3, PNG and more instantly online. Free, fast, secure file converter."
-        keywords="file converter, convert pdf, convert mp4, convert docx, convert jpg"
+        title="Universal File Converter — Convert Any File to PDF, DOCX, MP4 & More | MicroTools Hub"
+        description="Free online file converter for PDF, DOCX, PPTX, XLSX, MP4, MP3, PNG, JPG and more. Convert files instantly with drag & drop. Fast, secure and works on all devices."
+        keywords="file converter, convert file online, pdf converter, mp4 to mp3, docx to pdf, pptx to pdf, online converter, image converter, audio converter"
+        image="/og/file-converter.png"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          name: "Universal File Converter — MicroTools Hub",
+          url: "https://microtools-hub.vercel.app/tools/file-converter",
+          applicationCategory: "Utility",
+          operatingSystem: "All",
+          offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+          description:
+            "Instant file converter supporting PDF, DOCX, XLSX, PPTX, MP4, MP3, JPG, PNG, and more. No installation required.",
+        }}
       />
 
+      {/* ⭐ GOOGLE FAQ RICH RESULTS (Boosts SEO) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Which file types does this converter support?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "This converter supports PDF, DOCX, PPTX, XLSX, TXT, MP4, MP3, WAV, JPG, PNG, WEBP and more.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is the file converter free to use?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, the converter is completely free with no account or login required.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is file conversion safe?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes. All files are processed securely and automatically deleted after conversion.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Does converting files reduce quality?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Most formats maintain full quality. Images and videos may have light compression depending on output type.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+
+      {/* UI SECTION (UNCHANGED) */}
       <div className="max-w-3xl mx-auto">
 
         <h1 className="text-4xl font-extrabold text-indigo-600 mb-6 text-center">
           Universal File Converter
         </h1>
 
-        {/* How to Use */}
         <div className="p-5 bg-white shadow rounded-xl border mb-8">
           <h2 className="font-semibold text-lg mb-2">How to Use</h2>
           <ul className="list-disc ml-6 text-gray-700 leading-7">
@@ -90,7 +145,6 @@ export default function FileConverter() {
           </ul>
         </div>
 
-        {/* Upload Box */}
         <div
           onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
           onDragLeave={() => setDragActive(false)}
@@ -119,12 +173,10 @@ export default function FileConverter() {
           )}
         </div>
 
-        {/* Error Message */}
         {error && (
           <p className="text-red-600 mt-3 font-medium">{error}</p>
         )}
 
-        {/* Format Selector */}
         <div className="mt-6">
           <label className="font-medium mr-2">Convert to:</label>
           <select
@@ -138,7 +190,6 @@ export default function FileConverter() {
           </select>
         </div>
 
-        {/* Convert Button */}
         <button
           onClick={convertFile}
           className="w-full mt-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg transition"
@@ -146,7 +197,6 @@ export default function FileConverter() {
           {loading ? "Converting..." : "Convert File"}
         </button>
 
-        {/* Download Button */}
         {downloadUrl && (
           <div className="mt-8 text-center">
             <a
@@ -162,6 +212,7 @@ export default function FileConverter() {
     </>
   );
 }
+
 
 
 

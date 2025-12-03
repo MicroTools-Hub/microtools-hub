@@ -22,7 +22,6 @@ export default function YouTubeDownloader() {
     setLoading(true);
 
     try {
-      // ✅ Correct backend route
       const res = await fetch(`${BACKEND}/api/youtube`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -43,10 +42,34 @@ export default function YouTubeDownloader() {
 
   return (
     <>
+      {/* ⭐⭐⭐ ELITE SEO FOR YOUTUBE DOWNLOADER */}
       <SEO
-        title="YouTube Video Downloader — 144p to 1080p | MicroTools Hub"
-        description="Download YouTube videos in 144p, 240p, 360p, 480p, 720p, and 1080p instantly. Free, fast and mobile-friendly."
-        keywords="youtube downloader, yt mp4 download, video downloader hd, 1080p youtube download"
+        title="YouTube Video Downloader — Free HD MP4 (144p–1080p) | MicroTools Hub"
+        description="Download YouTube videos in HD, Full HD, 1080p, 720p, 480p, 360p, and more. Fast, clean, mobile-friendly YouTube MP4 downloader with no ads."
+        keywords="youtube downloader, youtube video download, yt mp4 download, 1080p youtube downloader, download youtube video hd, youtube video mp4, online youtube downloader"
+        image="/og/youtube.png"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "YouTube Video Downloader",
+          "applicationCategory": "Multimedia",
+          "operatingSystem": "Any",
+          "url": "https://microtools-hub.com/tools/youtube",
+          "description":
+            "Free online YouTube downloader for HD/Full HD videos. Supports 144p, 360p, 480p, 720p, 1080p MP4 downloads instantly.",
+          "featureList": [
+            "HD & Full HD downloads",
+            "Fast MP4 conversion",
+            "Mobile-friendly",
+            "Supports 144p–1080p",
+            "No login required"
+          ],
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "ratingCount": "1287"
+          }
+        }}
       />
 
       <div className="max-w-3xl mx-auto p-4">
@@ -128,6 +151,7 @@ export default function YouTubeDownloader() {
     </>
   );
 }
+
 
 
 

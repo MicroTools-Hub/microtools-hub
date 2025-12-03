@@ -62,10 +62,68 @@ export default function PasswordGenerator() {
 
   return (
     <>
+      {/* ⭐⭐⭐⭐⭐ FULL SEO UPGRADED */}
       <SEO
-        title="Password Generator — Create Ultra-Secure Passwords | MicroTools Hub"
-        description="Generate strong passwords instantly with customizable length, symbols, numbers, uppercase & lowercase letters."
-        keywords="password generator, secure password, strong passwords, random password"
+        title="Password Generator — Create Secure, Random & Strong Passwords | MicroTools Hub"
+        description="Generate ultra-secure passwords online instantly. Adjustable length, symbols, numbers, uppercase/lowercase letters. Free strong password generator with no limits."
+        keywords="password generator, strong password generator, random password, secure password, password strength checker"
+        image="/og/password-generator.png"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          name: "Password Generator — MicroTools Hub",
+          applicationCategory: "Security Application",
+          operatingSystem: "All",
+          url: "https://microtools-hub.vercel.app/tools/password",
+          description:
+            "Free strong password generator with length control and security strength meter.",
+          offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+        }}
+      />
+
+      {/* ⭐ Google FAQ Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Is the password generator free?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, the MicroTools Hub password generator is completely free with unlimited usage.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Are the passwords stored anywhere?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "No, all password generation happens locally on your device. Nothing is uploaded or saved.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What is the recommended password length?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Security experts recommend using passwords of at least 12–16 characters.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Does this tool generate strong, secure passwords?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes. You can include uppercase, lowercase, numbers, and symbols for maximum strength.",
+                },
+              }
+            ]
+          })
+        }}
       />
 
       <div className="max-w-3xl mx-auto">
@@ -206,6 +264,7 @@ export default function PasswordGenerator() {
     </>
   );
 }
+
 
 
 

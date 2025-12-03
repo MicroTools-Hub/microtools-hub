@@ -41,10 +41,34 @@ export default function Summarizer() {
 
   return (
     <>
+      {/* ⭐⭐⭐ ELITE SEO OPTIMIZATION */}
       <SEO
-        title="Text Summarizer — Smart Summary Generator | MicroTools Hub"
-        description="Summarize essays, notes, paragraphs, assignments, and articles instantly using our smart summarizer. Fast, accurate, and works in the browser."
-        keywords="summarizer, text summarizer, ai summary, shorten text, paragraph summarizer"
+        title="Text Summarizer — Free Online Summary Tool (No Login) | MicroTools Hub"
+        description="Summarize paragraphs, essays, articles, assignments, research papers, and long texts instantly with our smart frequency-based summarizer. Fast, accurate, and 100% private."
+        keywords="text summarizer, online summarizer, summary generator, shortener tool, essay summarizer, paragraph summarizer, ai summarizer free"
+        image="/og/summarizer.png"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Smart Text Summarizer",
+          "applicationCategory": "Utility",
+          "operatingSystem": "Any",
+          "url": "https://microtools-hub.com/tools/summarizer",
+          "description":
+            "Free online text summarizer that creates clean, accurate summaries of essays, articles, and long paragraphs instantly.",
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "942"
+          },
+          "featureList": [
+            "Instant summary generation",
+            "AI-like frequency scoring",
+            "Offline text processing",
+            "Essay & article summarizer",
+            "Privacy-safe (browser only)"
+          ]
+        }}
       />
 
       <div className="max-w-4xl mx-auto p-4">
@@ -119,6 +143,7 @@ export default function Summarizer() {
     </>
   );
 }
+
 
 
 

@@ -41,7 +41,6 @@ export default function ImageCompressor() {
     formData.append("quality", quality);
 
     try {
-      // Correct backend route
       const res = await fetch(`${BACKEND}/api/image-compress`, {
         method: "POST",
         body: formData,
@@ -64,19 +63,77 @@ export default function ImageCompressor() {
 
   return (
     <>
+      {/* ⭐⭐⭐⭐⭐ ENTERPRISE SEO HEAD */}
       <SEO
-        title="Image Compressor — Compress JPG, PNG & WebP Online | MicroTools Hub"
-        description="Fast online image compressor for JPG, PNG, and WebP. Drag & drop, adjust quality, and download compressed images instantly."
-        keywords="image compressor, compress png, reduce jpg size"
+        title="Image Compressor — Reduce JPG, PNG & WebP Size Online (No Quality Loss)"
+        description="Free online image compressor: shrink JPG, PNG, and WebP images instantly. Drag & drop, adjustable quality, batch compression & ZIP download. Fast, secure, mobile-friendly."
+        keywords="image compressor, compress images online, reduce jpg size, compress png, compress webp, reduce image size online"
+        image="/og/image-compressor.png"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          name: "Image Compressor — MicroTools Hub",
+          url: "https://microtools-hub.vercel.app/tools/image-compressor",
+          applicationCategory: "Utility",
+          operatingSystem: "All",
+          offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+          description:
+            "Online image compressor supporting PNG, JPG & WebP formats. Batch compress images with drag & drop, adjustable quality, and instant download.",
+        }}
       />
 
+      {/* ⭐ GOOGLE FAQ SCHEMA (RANKS AS RICH RESULTS) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Which image formats are supported?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Our tool supports JPG, PNG, and WebP format images for fast and high-quality compression.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Does image compression reduce quality?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "You can adjust compression from 10% to 100%. Higher quality = less compression. You control the results.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is this image compressor free?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, it's 100% free with no signup and no limits.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is my data safe during compression?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, all images are processed securely and automatically deleted after compression.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+
+      {/* UI — DO NOT TOUCH (Your design stays unchanged) */}
       <div className="max-w-3xl mx-auto">
 
         <h1 className="text-4xl font-extrabold text-indigo-600 mb-6 text-center">
           Image Compressor
         </h1>
 
-        {/* HOW TO USE */}
         <div className="p-5 bg-white shadow rounded-xl border mb-8">
           <h2 className="font-semibold text-lg mb-2">How to Use</h2>
           <ul className="list-disc ml-6 text-gray-700 leading-7">
@@ -87,7 +144,6 @@ export default function ImageCompressor() {
           </ul>
         </div>
 
-        {/* DRAG & DROP UPLOAD */}
         <div
           className={`border-2 rounded-xl p-10 text-center transition ${
             dragActive ? "border-indigo-500 bg-indigo-50" : "border-gray-300 bg-gray-50"
@@ -111,7 +167,6 @@ export default function ImageCompressor() {
             className="cursor-pointer"
           />
 
-          {/* PREVIEW GRID */}
           {files.length > 0 && (
             <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-4">
               {files.map((f, index) => (
@@ -130,12 +185,10 @@ export default function ImageCompressor() {
           )}
         </div>
 
-        {/* ERROR */}
         {error && (
           <p className="text-red-600 mt-3 font-medium">{error}</p>
         )}
 
-        {/* QUALITY SLIDER */}
         <div className="mt-6">
           <label className="font-medium block mb-2">Quality: {quality}%</label>
           <input
@@ -148,7 +201,6 @@ export default function ImageCompressor() {
           />
         </div>
 
-        {/* COMPRESS BUTTON */}
         <button
           onClick={uploadImages}
           className="w-full mt-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg transition"
@@ -156,7 +208,6 @@ export default function ImageCompressor() {
           {loading ? "Compressing..." : "Compress Images"}
         </button>
 
-        {/* DOWNLOAD RESULT */}
         {results && (
           <div className="mt-8 text-center">
             <a
@@ -173,5 +224,6 @@ export default function ImageCompressor() {
     </>
   );
 }
+
 
 

@@ -17,7 +17,6 @@ export default function FileCompressor() {
     setProgress(0);
   };
 
-  // Drag & Drop visual effect
   const handleDrag = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -53,7 +52,6 @@ export default function FileCompressor() {
       form.append("file", file);
       form.append("level", level);
 
-      // Correct backend route
       const res = await fetch(`${BACKEND}/api/file-compress`, {
         method: "POST",
         body: form,
@@ -71,7 +69,6 @@ export default function FileCompressor() {
 
       const blob = await res.blob();
       setDownloadUrl(URL.createObjectURL(blob));
-
       setProgress(100);
     } catch (error) {
       console.error("Upload error:", error);
@@ -83,18 +80,76 @@ export default function FileCompressor() {
 
   return (
     <>
+      {/* 🔥 TOP-CLASS SEO UPGRADE */}
       <SEO
-        title="Online File Compressor — Reduce File Size Fast | MicroTools Hub"
-        description="Free online file compressor for ZIP, DOCX, PPTX, XLSX, MP4, PDF, images, and more. Modern UI, drag & drop, fast compression, no ads."
-        keywords="file compressor, compress file, file reducer, zip compressor, compress mp4"
+        title="Online File Compressor — Reduce File Size (ZIP, MP4, PDF, DOCX) | MicroTools Hub"
+        description="Free online file compressor to reduce file size instantly. Compress PDF, DOCX, PPTX, MP4, ZIP, JPG, PNG & more. Fast, secure, drag & drop support, works on all devices."
+        keywords="file compressor, compress files online, reduce file size, compress mp4, compress pdf, compress docx, file size reducer, online zip compressor"
+        image="/og/file-compressor.png"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          name: "Online File Compressor — MicroTools Hub",
+          url: "https://microtools-hub.vercel.app/tools/file-compressor",
+          applicationCategory: "Utility",
+          operatingSystem: "All",
+          offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+          description:
+            "Compress large files online including videos, PDFs, documents, archives, and images. No installation required.",
+        }}
       />
 
+      {/* ⭐ FAQ Rich Schema for Google Rich Results */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Which file types can I compress?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "You can compress PDF, DOCX, PPTX, XLSX, MP4, JPG, PNG, ZIP, and many other file types.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is online file compression safe?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes. Files are processed securely and automatically deleted after compression.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Does compression reduce video quality?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "High compression reduces file size aggressively and may slightly reduce video quality.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is this file compressor free?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, the file compressor is 100% free with no signup required.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+
+      {/* UI (UNCHANGED) */}
       <div className="max-w-3xl mx-auto p-6">
         <h1 className="text-3xl font-bold text-indigo-600 mb-6 text-center">
           File Compressor
         </h1>
 
-        {/* How to use */}
         <div className="p-4 bg-white border rounded-xl shadow mb-6">
           <h2 className="font-semibold text-lg mb-2">How to Use</h2>
           <ul className="list-disc ml-5 text-gray-700 leading-7">
@@ -106,7 +161,6 @@ export default function FileCompressor() {
           </ul>
         </div>
 
-        {/* Drag & Drop */}
         <div
           ref={dropRef}
           onDragEnter={handleDrag}
@@ -117,7 +171,8 @@ export default function FileCompressor() {
         >
           {file ? (
             <p className="text-lg text-gray-800">
-              <b>Selected File:</b> {file.name} ({(file.size / 1024 / 1024).toFixed(2)} MB)
+              <b>Selected File:</b> {file.name} (
+              {(file.size / 1024 / 1024).toFixed(2)} MB)
             </p>
           ) : (
             <p className="text-lg">Drag & Drop your file here or click below</p>
@@ -130,7 +185,6 @@ export default function FileCompressor() {
           className="mt-4 mb-4"
         />
 
-        {/* Compression level */}
         <div className="mb-4">
           <label className="font-medium">Compression Level: </label>
           <select
@@ -144,7 +198,6 @@ export default function FileCompressor() {
           </select>
         </div>
 
-        {/* Compress Button */}
         <button
           onClick={uploadFile}
           className="bg-indigo-600 text-white px-8 py-3 rounded-lg hover:bg-indigo-700 transition"
@@ -152,7 +205,6 @@ export default function FileCompressor() {
           {loading ? "Compressing..." : "Compress File"}
         </button>
 
-        {/* Progress Bar */}
         {loading && (
           <div className="w-full bg-gray-200 rounded-full h-3 mt-4">
             <div
@@ -162,7 +214,6 @@ export default function FileCompressor() {
           </div>
         )}
 
-        {/* Download */}
         {downloadUrl && (
           <div className="mt-6">
             <a
@@ -175,7 +226,6 @@ export default function FileCompressor() {
           </div>
         )}
 
-        {/* FAQ Section */}
         <section className="mt-12 p-4 bg-white border rounded-xl shadow">
           <h2 className="text-2xl font-bold text-indigo-600 mb-4">
             Frequently Asked Questions
@@ -190,19 +240,19 @@ export default function FileCompressor() {
             <div>
               <h3 className="font-semibold">What does compression do?</h3>
               <p>
-                It reduces file size by optimizing content while keeping quality as high as possible.
+                It reduces file size by optimizing content while keeping quality high.
               </p>
             </div>
 
             <div>
               <h3 className="font-semibold">Is it safe?</h3>
-              <p>Yes, all files are processed temporarily and auto-deleted.</p>
+              <p>Yes, all files are temporary and auto-deleted.</p>
             </div>
 
             <div>
               <h3 className="font-semibold">Does it reduce video quality?</h3>
               <p>
-                For MP4, high compression reduces size but may slightly reduce quality.
+                High compression reduces size aggressively and may slightly reduce MP4 quality.
               </p>
             </div>
           </div>
@@ -211,6 +261,7 @@ export default function FileCompressor() {
     </>
   );
 }
+
 
 
 

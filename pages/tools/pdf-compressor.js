@@ -20,7 +20,7 @@ export default function PDFCompressor() {
     formData.append("level", level);
 
     try {
-      // ✅ Correct backend route
+      // Backend route
       const res = await fetch(`${BACKEND}/api/pdf-compress`, {
         method: "POST",
         body: formData,
@@ -44,7 +44,6 @@ export default function PDFCompressor() {
     setLoading(false);
   };
 
-  // Drag & drop handlers
   const handleDrop = (e) => {
     e.preventDefault();
     setDragging(false);
@@ -65,10 +64,68 @@ export default function PDFCompressor() {
 
   return (
     <>
+      {/* ⭐⭐⭐⭐⭐ SEO UPGRADED */}
       <SEO
-        title="PDF Compressor — Reduce PDF Size Online | MicroTools Hub"
-        description="Fast and secure PDF compressor with high-quality optimization. Reduce file size while keeping readability perfect."
-        keywords="pdf compressor, compress pdf online, reduce pdf size"
+        title="PDF Compressor — Reduce PDF File Size Online (No Quality Loss) | MicroTools Hub"
+        description="Compress PDF files online for free. Reduce PDF size without losing quality. Fast, secure, no signup required. Drag & drop and download instantly."
+        keywords="compress pdf, pdf compressor, reduce pdf size online, make pdf smaller, pdf optimizer, free pdf compressor"
+        image="/og/pdf-compressor.png"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          name: "PDF Compressor — MicroTools Hub",
+          url: "https://microtools-hub.vercel.app/tools/pdf-compressor",
+          applicationCategory: "UtilityApplication",
+          operatingSystem: "All",
+          description:
+            "Free PDF compressor that reduces file size while keeping quality high. Drag & drop, fast optimization, no login.",
+          offers: { "@type": "Offer", price: "0", priceCurrency: "USD" }
+        }}
+      />
+
+      {/* ⭐ FAQ Schema for Google Rich Results */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Is this PDF compressor free?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, MicroTools Hub offers a completely free and fast PDF compressor with no limits."
+                }
+              },
+              {
+                "@type": "Question",
+                name: "Does compressing a PDF reduce quality?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Low compression keeps the best quality, while medium and high give smaller sizes. You can choose the level."
+                }
+              },
+              {
+                "@type": "Question",
+                name: "Are my PDF files stored?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "No. All files are processed temporarily and automatically deleted from the server."
+                }
+              },
+              {
+                "@type": "Question",
+                name: "Which PDF sizes can be compressed?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "You can compress large PDFs, scanned PDFs, office-generated PDFs, and more."
+                }
+              }
+            ]
+          })
+        }}
       />
 
       <div className="max-w-3xl mx-auto">
@@ -167,6 +224,7 @@ export default function PDFCompressor() {
     </>
   );
 }
+
 
 
 

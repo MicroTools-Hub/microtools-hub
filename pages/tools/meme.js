@@ -11,7 +11,7 @@ export default function MemeGenerator() {
 
   const canvasRef = useRef(null);
 
-  // Load font once
+  // Load Impact Font
   useEffect(() => {
     const font = new FontFace(
       "Impact",
@@ -47,7 +47,6 @@ export default function MemeGenerator() {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
-    // Scale canvas to fit screen
     const maxWidth = 800;
     const scale = img.width > maxWidth ? maxWidth / img.width : 1;
 
@@ -62,7 +61,9 @@ export default function MemeGenerator() {
     ctx.lineWidth = size / 10;
     ctx.textAlign = "center";
 
-    if (top) drawWrappedText(ctx, top.toUpperCase(), canvas.width / 2, size + 10, size);
+    if (top)
+      drawWrappedText(ctx, top.toUpperCase(), canvas.width / 2, size + 10, size);
+
     if (bottom)
       drawWrappedText(
         ctx,
@@ -86,6 +87,7 @@ export default function MemeGenerator() {
         line = w + " ";
       } else line = testLine;
     }
+
     lines.push(line);
 
     lines.forEach((l, i) => {
@@ -105,12 +107,71 @@ export default function MemeGenerator() {
 
   return (
     <>
+      {/* ⭐⭐⭐⭐⭐ PRO SEO */}
       <SEO
-        title="Meme Caption Generator — Create HD Memes Fast | MicroTools Hub"
-        description="Create professional HD memes online. Add top/bottom text, adjust font size, drag & drop image, download high-quality memes."
-        keywords="meme creator, meme maker, meme generator online"
+        title="Meme Generator — Create HD Memes Online (Free) | MicroTools Hub"
+        description="Create memes instantly with top & bottom text, Impact font, HD export, drag & drop images, and full customization. Free online meme maker with no watermark."
+        keywords="meme maker, meme generator, meme creator online, create memes, impact font meme generator"
+        image="/og/meme-generator.png"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          name: "Meme Generator — MicroTools Hub",
+          applicationCategory: "Utility",
+          operatingSystem: "All",
+          url: "https://microtools-hub.vercel.app/tools/meme",
+          description:
+            "Free online meme generator with HD export, drag & drop upload, and classic Impact caption styling.",
+          offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+        }}
       />
 
+      {/* ⭐ FAQ Schema for Google Rich Results */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Is this meme generator free?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, the MicroTools Hub meme generator is completely free with no watermarks.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Can I download memes in HD?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, all memes are exported in high resolution PNG format.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Does this meme maker require signup?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "No signup needed — just upload an image, type text, and download.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Does it support drag and drop?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, you can drag & drop images directly into the editor.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+
+      {/* UI (unchanged) */}
       <div className="max-w-3xl mx-auto">
 
         <h1 className="text-4xl font-extrabold text-indigo-600 mb-6 text-center">
@@ -174,7 +235,7 @@ export default function MemeGenerator() {
             }}
           />
 
-          {/* Font Size Slider */}
+          {/* Font Slider */}
           <div>
             <label className="font-medium">Font Size: {fontSize}px</label>
             <input
@@ -191,7 +252,7 @@ export default function MemeGenerator() {
           </div>
         </div>
 
-        {/* Canvas Preview */}
+        {/* Canvas */}
         <canvas
           ref={canvasRef}
           className="rounded-xl shadow-lg border max-w-full mb-4"
@@ -209,6 +270,7 @@ export default function MemeGenerator() {
     </>
   );
 }
+
 
 
 
