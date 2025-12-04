@@ -3,19 +3,33 @@ import SEO from "../components/SEO";
 import Link from "next/link";
 
 export default function Home() {
-  const tools = [
-    { name: "YouTube Video Downloader", link: "/tools/youtube", icon: "📺" },
-    { name: "YouTube Shorts Downloader", link: "/tools/shorts", icon: "🎬" },
-    { name: "PDF Compressor", link: "/tools/pdf-compressor", icon: "📄" },
-    { name: "Image Compressor", link: "/tools/image-compressor", icon: "🖼️" },
-    { name: "File Converter", link: "/tools/file-converter", icon: "🔄" },
-    { name: "Meme Generator", link: "/tools/meme", icon: "😂" },
-    { name: "Password Generator", link: "/tools/password", icon: "🔐" },
-    { name: "Quote Generator", link: "/tools/quotes", icon: "💬" },
-    { name: "Emoji Translator", link: "/tools/emoji", icon: "😎" },
-    { name: "Text Summarizer", link: "/tools/summarizer", icon: "📝" },
-    { name: "File Compressor", link: "/tools/file-compressor", icon: "📦" },
-  ];
+const tools = [
+  { name: "YouTube Video Downloader", link: "/tools/youtube", icon: "📺" },
+  { name: "YouTube Shorts Downloader", link: "/tools/shorts", icon: "🎬" },
+  { name: "Instagram Downloader", link: "/tools/instagram", icon: "📸" },
+  { name: "TikTok Downloader", link: "/tools/tiktok", icon: "🎵" },
+  { name: "Twitter / X Downloader", link: "/tools/twitter", icon: "🐦" },
+  { name: "Facebook Video Downloader", link: "/tools/facebook", icon: "📘" },
+  
+  { name: "PDF Compressor", link: "/tools/pdf-compressor", icon: "📄" },
+  { name: "Image Compressor", link: "/tools/image-compressor", icon: "🖼️" },
+  { name: "Image Resizer", link: "/tools/image-resizer", icon: "📏" },
+  { name: "Background Remover", link: "/tools/remove-bg", icon: "🧼" },
+  { name: "Watermark Remover", link: "/tools/watermark-remover", icon: "🚿" },
+
+  { name: "File Converter", link: "/tools/file-converter", icon: "🔄" },
+  { name: "File Compressor", link: "/tools/file-compressor", icon: "📦" },
+
+  { name: "QR Code Generator", link: "/tools/qr", icon: "🔳" },
+  { name: "AI PFP Maker", link: "/tools/ai-pfp", icon: "🤖" },
+
+  { name: "Meme Generator", link: "/tools/meme", icon: "😂" },
+  { name: "Password Generator", link: "/tools/password", icon: "🔐" },
+  { name: "Quote Generator", link: "/tools/quotes", icon: "💬" },
+  { name: "Emoji Translator", link: "/tools/emoji", icon: "😎" },
+  { name: "Text Summarizer", link: "/tools/summarizer", icon: "📝" },
+];
+
 
   // Aggressive SEO keywords (broad + long-tail clusters)
   const keywords =
