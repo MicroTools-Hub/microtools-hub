@@ -6,7 +6,6 @@ export default function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        {/* Google AdSense Verification */}
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6119998481340838"
@@ -20,4 +19,5 @@ export default function MyApp({ Component, pageProps }) {
     </>
   );
 }
+
 
