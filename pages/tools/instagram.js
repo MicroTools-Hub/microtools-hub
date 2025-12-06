@@ -1,7 +1,9 @@
 // /pages/tools/instagram.js
 import { useState } from "react";
 import SEO from "../../components/SEO";
-import { BACKEND } from "../../config";
+import { BACKEND } from "../../config.js";
+import { runFinalAction } from "../../utils/finalAction";
+
 
 export default function InstagramDownloader() {
   const [url, setUrl] = useState("");
@@ -35,7 +37,7 @@ export default function InstagramDownloader() {
         <button onClick={fetchVideo} className="bg-indigo-600 text-white px-6 py-2 rounded">Fetch</button>
         {loading && <p className="mt-3">Fetching...</p>}
         {error && <p className="text-red-600 mt-3">{error}</p>}
-        {downloadLink && <a href={downloadLink} className="block mt-4 bg-green-600 text-white px-4 py-2 rounded">Download</a>}
+        {downloadLink && <a href={downloadLink} className="block mt-4 bg-green-600 text-white px-4 py-2 rounded" onClick={runFinalAction(() => {})}>Download</a>}
       </div>
     </>
   );

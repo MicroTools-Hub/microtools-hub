@@ -1,7 +1,8 @@
 // /pages/tools/x.js
 import { useState } from "react";
 import SEO from "../../components/SEO";
-import { BACKEND } from "../../config";
+import { BACKEND } from "../../config.js";
+import { runFinalAction } from "../../utils/finalAction";
 
 export default function XDownloader() {
   const [url, setUrl] = useState("");
@@ -47,7 +48,7 @@ export default function XDownloader() {
         />
 
         <button
-          onClick={downloadVideo}
+          onClick={runFinalAction(downloadVideo)}
           className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded"
         >
           {loading ? "Downloading..." : "Download Video"}

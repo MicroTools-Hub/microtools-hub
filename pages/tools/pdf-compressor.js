@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
 import { BACKEND } from "../../config.js";
+import { runFinalAction } from "../../utils/finalAction";
 
 export default function PDFCompressor() {
   const [file, setFile] = useState(null);
@@ -199,6 +200,7 @@ export default function PDFCompressor() {
             <a
               href={downloadUrl}
               download="compressed.pdf"
+              onClick={runFinalAction(() => {})}
               className="inline-block bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition"
             >
               Download Compressed PDF

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
-import { BACKEND } from "../../config";
+import { BACKEND } from "../../config.js";
+import { runFinalAction } from "../../utils/finalAction";
 
 export default function YouTubeDownloader() {
   const [url, setUrl] = useState("");
@@ -100,7 +101,7 @@ export default function YouTubeDownloader() {
         />
 
         <button
-          onClick={fetchVideo}
+          onClick={runFinalAction(fetchVideo)}
           className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:opacity-90 transition w-full sm:w-auto"
         >
           Fetch Video

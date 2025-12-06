@@ -1,6 +1,8 @@
 import { useState, useRef } from "react";
 import SEO from "../../components/SEO";
 import { BACKEND } from "../../config.js";
+import { runFinalAction } from "../../utils/finalAction";
+
 
 export default function FileCompressor() {
   const [file, setFile] = useState(null);
@@ -219,10 +221,12 @@ export default function FileCompressor() {
             <a
               href={downloadUrl}
               download={(file?.name || "file") + ".zip"}
+              onClick={runFinalAction(() => {})}
               className="bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700"
             >
               Download Compressed File (ZIP)
             </a>
+
           </div>
         )}
 
