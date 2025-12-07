@@ -207,26 +207,16 @@ export default function FileCompressor() {
         >
           {loading ? "Compressing..." : "Compress File"}
         </button>
-           <a
-             href={downloadUrl}
-             download={(file?.name || "file") + ".zip"}
-             className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg shadow"
-           >
-             Download Compressed ZIP
-           </a>
-        )}
 
         {downloadUrl && (
-          <div className="mt-6">
+          <div className="mt-8 text-center">
             <a
               href={downloadUrl}
-              download={(file?.name || "file") + ".zip"}
-              onClick={runFinalAction(() => {})}
-              className="bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700"
+              download="compressed.zip"
+              className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg shadow"
             >
-              Download Compressed File (ZIP)
+              Download Compressed ZIP
             </a>
-
           </div>
         )}
 
