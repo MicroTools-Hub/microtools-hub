@@ -138,13 +138,20 @@ export default function ImageResizer() {
         </button>
 
         {resultUrl && (
-          <a
-            href={resultUrl}
-            download="resized.jpg"
+          <button
+            onClick={runFinalAction(() => {
+              const a = document.createElement("a");
+              a.href = resultUrl;
+              a.download = "resized.jpg";
+              a.rel = "noopener";
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+            })}
             className="block mt-4 bg-green-600 text-white px-4 py-2 rounded text-center"
           >
             Download Resized Image
-          </a>
+          </button>
         )}
       </ToolLayout>
     </>

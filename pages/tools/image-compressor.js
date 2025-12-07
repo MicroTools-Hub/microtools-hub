@@ -2,6 +2,7 @@ import { useState } from "react";
 import SEO from "../../components/SEO";
 import ToolLayout from "../../components/ToolLayout";
 import { BACKEND } from "../../config.js";
+import { runFinalAction } from "../../utils/finalAction";
 import { PhotoIcon, CloudArrowUpIcon } from "@heroicons/react/24/solid";
 
 
@@ -211,13 +212,20 @@ export default function ImageCompressor() {
 
         {results && (
           <div className="mt-8 text-center">
-           <a
-             href={results}
-             download="compressed-images.zip"
+           <button
+             onClick={runFinalAction(() => {
+               const a = document.createElement("a");
+               a.href = results;
+               a.download = "compressed-images.zip";
+               a.rel = "noopener";
+               document.body.appendChild(a);
+               a.click();
+               document.body.removeChild(a);
+             })}
              className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg shadow"
            >
              Download Compressed ZIP
-           </a>
+           </button>
 
           </div>
         )}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
 import ToolLayout from "../../components/ToolLayout";
+import { runFinalAction } from "../../utils/finalAction";
 import { BACKEND } from "../../config.js";
 
 export default function PDFCompressor() {
@@ -196,13 +197,20 @@ export default function PDFCompressor() {
         {/* Download */}
         {downloadUrl && (
           <div className="mt-6 text-center">
-            <a
-              href={downloadUrl}
-              download="compressed.pdf"
+            <button
+              onClick={runFinalAction(() => {
+                  const a = document.createElement("a");
+                  a.href = downloadUrl;
+                  a.download = "compressed.pdf";
+                  a.rel = "noopener";
+                  document.body.appendChild(a);
+                  a.click();
+                  document.body.removeChild(a);
+                })}
               className="inline-block bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition"
             >
               Download Compressed PDF
-            </a>
+            </button>
           </div>
         )}
 

@@ -3,6 +3,7 @@ import { useState } from "react";
 import SEO from "../../components/SEO";
 import ToolLayout from "../../components/ToolLayout";
 import { BACKEND } from "../../config.js";
+import { runFinalAction } from "../../utils/finalAction";
 
 
 export default function InstagramDownloader() {
@@ -37,7 +38,21 @@ export default function InstagramDownloader() {
         <button onClick={fetchVideo} className="bg-indigo-600 text-white px-6 py-2 rounded">Fetch</button>
         {loading && <p className="mt-3">Fetching...</p>}
         {error && <p className="text-red-600 mt-3">{error}</p>}
-        {downloadLink && <a href={downloadLink} className="block mt-4 bg-green-600 text-white px-4 py-2 rounded">Download</a>}
+        {downloadLink && (
+          <button
+            onClick={runFinalAction(() => {
+              const a = document.createElement("a");
+              a.href = downloadLink;
+              a.rel = "noopener";
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+            })}
+            className="block mt-4 bg-green-600 text-white px-4 py-2 rounded"
+          >
+            Download
+          </button>
+        )}
       </ToolLayout>
     </>
   );

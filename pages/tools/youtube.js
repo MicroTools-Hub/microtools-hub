@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { runFinalAction } from "../../utils/finalAction";
 import SEO from "../../components/SEO";
 import ToolLayout from "../../components/ToolLayout";
 import { BACKEND } from "../../config.js";
@@ -134,13 +135,20 @@ export default function YouTubeDownloader() {
             <div className="space-y-3">
               {resolutions.map((res) =>
                 info.links?.[res] ? (
-                  <a
+                  <button
                     key={res}
-                    href={info.links[res]}
+                    onClick={runFinalAction(() => {
+                      const a = document.createElement("a");
+                      a.href = info.links[res];
+                      a.rel = "noopener";
+                      document.body.appendChild(a);
+                      a.click();
+                      document.body.removeChild(a);
+                    })}
                     className="block bg-gray-100 py-3 rounded-lg text-center border hover:bg-gray-200 transition font-medium"
                   >
                     Download {res}
-                  </a>
+                  </button>
                 ) : null
               )}
             </div>

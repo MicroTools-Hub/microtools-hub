@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { runFinalAction } from "../../utils/finalAction";
 import SEO from "../../components/SEO";
 import ToolLayout from "../../components/ToolLayout";
 
@@ -110,7 +111,7 @@ export default function Summarizer() {
           />
 
           <button
-            onClick={summarize}
+            onClick={runFinalAction(summarize)}
             className="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition"
           >
             Summarize

@@ -1,5 +1,6 @@
 // Cleaned Facebook downloader component — single, authoritative copy
 import { useState } from "react";
+import { runFinalAction } from "../../utils/finalAction";
 import SEO from "../../components/SEO";
 import ToolLayout from "../../components/ToolLayout";
 import { BACKEND } from "../../config.js";
@@ -89,7 +90,7 @@ export default function FacebookDownloader() {
 
         {info && (
           <button
-            onClick={downloadVideo}
+            onClick={runFinalAction(downloadVideo)}
             className="block mt-3 bg-green-600 text-white px-4 py-2 rounded"
           >
             Download

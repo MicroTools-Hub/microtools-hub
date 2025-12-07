@@ -1,5 +1,6 @@
 // /pages/tools/tiktok.js
 import { useState } from "react";
+import { runFinalAction } from "../../utils/finalAction";
 import SEO from "../../components/SEO";
 import ToolLayout from "../../components/ToolLayout";
 import { BACKEND } from "../../config.js";
@@ -17,7 +18,21 @@ export default function TikTokDownloader(){
       <h1 className="text-3xl font-bold text-indigo-600 mb-6">TikTok Downloader</h1>
       <input value={url} onChange={(e)=>setUrl(e.target.value)} className="w-full p-3 border rounded mb-3" />
       <button onClick={fetchVideo} className="bg-indigo-600 text-white px-6 py-2 rounded">Fetch</button>
-      {info && <a className="block mt-3 bg-green-600 text-white px-4 py-2 rounded" href={`${BACKEND}/download?url=${encodeURIComponent(url)}&format=best`}>Download</a>}
+      {info && (
+        <button
+          onClick={runFinalAction(() => {
+            const a = document.createElement("a");
+            a.href = `${BACKEND}/download?url=${encodeURIComponent(url)}&format=best`;
+            a.rel = "noopener";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+          })}
+          className="block mt-3 bg-green-600 text-white px-4 py-2 rounded"
+        >
+          Download
+        </button>
+      )}
     </ToolLayout>
   </>);
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
 import ToolLayout from "../../components/ToolLayout";
+import { runFinalAction } from "../../utils/finalAction";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 export default function PasswordGenerator() {
@@ -241,17 +242,13 @@ export default function PasswordGenerator() {
 
           {/* Generate Button */}
           <button
-            onClick={generatePassword}
+              onClick={runFinalAction(generatePassword)}
             className="w-full py-3 bg-indigo-600 text-white hover:bg-indigo-700 rounded-lg text-lg font-semibold"
           >
             Generate Password
           </button>
         </div>
-
-        {/* Instructions */}
-        <section className="mt-12">
-          <h2 className="text-2xl font-bold text-indigo-600 mb-3">
-            How to Use This Password Generator
+}
           </h2>
 
           <ul className="list-disc ml-5 text-gray-700 leading-7">

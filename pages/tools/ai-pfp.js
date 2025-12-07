@@ -1,5 +1,6 @@
 // /pages/tools/ai-pfp.js
 import { useState } from "react";
+import { runFinalAction } from "../../utils/finalAction";
 import SEO from "../../components/SEO";
 import ToolLayout from "../../components/ToolLayout";
 import { BACKEND } from "../../config.js";
@@ -43,7 +44,7 @@ export default function AIPFP(){
         />
 
         <button
-          onClick={generate}
+          onClick={runFinalAction(generate)}
           className="bg-indigo-600 text-white px-4 py-2 rounded"
         >
           Generate

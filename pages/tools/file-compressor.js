@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { runFinalAction } from "../../utils/finalAction";
 import SEO from "../../components/SEO";
 import ToolLayout from "../../components/ToolLayout";
 import { BACKEND } from "../../config.js";
@@ -210,13 +211,20 @@ export default function FileCompressor() {
 
         {downloadUrl && (
           <div className="mt-8 text-center">
-            <a
-              href={downloadUrl}
-              download="compressed.zip"
+            <button
+              onClick={runFinalAction(() => {
+                  const a = document.createElement("a");
+                  a.href = downloadUrl;
+                  a.download = "compressed.zip";
+                  a.rel = "noopener";
+                  document.body.appendChild(a);
+                  a.click();
+                  document.body.removeChild(a);
+                })}
               className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg shadow"
             >
               Download Compressed ZIP
-            </a>
+            </button>
           </div>
         )}
 

@@ -4,10 +4,9 @@ import ToolLayout from "../../components/ToolLayout";
 
 export default function QuoteGenerator() {
   const [category, setCategory] = useState("motivational");
-  const [quote, setQuote] = useState("");
-  const [copied, setCopied] = useState(false);
+  );
+}
 
-  // MASSIVELY EXPANDED QUOTES (600+ total)
   const QUOTES = {
     motivational: [
       "Push yourself because no one else is going to do it for you.",
@@ -231,7 +230,7 @@ export default function QuoteGenerator() {
           </select>
 
           <button
-            onClick={generateQuote}
+            onClick={runFinalAction(generateQuote)}
             className="bg-indigo-600 w-1/2 text-white px-6 py-2 rounded-lg hover:bg-indigo-700"
           >
             Generate

@@ -1,4 +1,5 @@
 ﻿import { useState } from "react";
+import { runFinalAction } from "../../utils/finalAction";
 import SEO from "../../components/SEO";
 import ToolLayout from "../../components/ToolLayout";
 import { BACKEND } from "../../config.js";
@@ -47,11 +48,11 @@ export default function XDownloader() {
         />
 
         <button
-          onClick={downloadVideo}
+          onClick={runFinalAction(downloadVideo)}
           disabled={loading}
           className="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-60 text-white px-6 py-2 rounded"
         >
-          {loading ? "Downloading" : "Download Video"}
+          {loading ? "Downloading…" : "Download Video"}
         </button>
 
         {error && <p className="text-red-600">{error}</p>}

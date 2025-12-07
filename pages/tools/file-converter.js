@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { runFinalAction } from "../../utils/finalAction";
 import { CloudArrowUpIcon } from "@heroicons/react/24/solid";
 import SEO from "../../components/SEO";
 import ToolLayout from "../../components/ToolLayout";
@@ -201,13 +202,20 @@ export default function FileConverter() {
 
         {downloadUrl && (
           <div className="mt-8 text-center">
-           <a
-             href={downloadUrl}
-             download={(file?.name || "file") + ".zip"}
+           <button
+             onClick={runFinalAction(() => {
+               const a = document.createElement("a");
+               a.href = downloadUrl;
+               a.download = (file?.name || "file") + ".zip";
+               a.rel = "noopener";
+               document.body.appendChild(a);
+               a.click();
+               document.body.removeChild(a);
+             })}
              className="bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700"
            >
              Download Compressed File (ZIP)
-           </a>
+           </button>
 
           </div>
         )}
