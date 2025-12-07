@@ -2,8 +2,11 @@ export function triggerPopUnderOnce() {
   if (typeof window === "undefined") return;
 
   try {
-    if (sessionStorage.getItem("popunder_shown")) return;
+    // ✅ BLOCK MOBILE DEVICES
+    if (window.innerWidth <= 768) return;
 
+    // ✅ Only once per session
+    if (sessionStorage.getItem("popunder_shown")) return;
     sessionStorage.setItem("popunder_shown", "1");
 
     const script = document.createElement("script");
@@ -16,3 +19,4 @@ export function triggerPopUnderOnce() {
     console.error("Popunder blocked");
   }
 }
+
