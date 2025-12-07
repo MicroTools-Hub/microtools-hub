@@ -2,14 +2,14 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
 import { BACKEND } from "../../config.js";
-import { runFinalAction } from "../../utils/finalAction";
+
 
 export default function AIPFP(){
   const [prompt, setPrompt] = useState("studio portrait, closeup, dramatic lighting");
   const [loading, setLoading] = useState(false);
   const [job, setJob] = useState(null);
 
-  const generate = runFinalAction(async () => {
+  const generate = async () => {
     setLoading(true);
 
     const res = await fetch(`${BACKEND}/api/ai-pfp`, {
@@ -21,7 +21,7 @@ export default function AIPFP(){
     const data = await res.json();
     setJob(data);
     setLoading(false);
-  });
+  };
 
   return (
     <>

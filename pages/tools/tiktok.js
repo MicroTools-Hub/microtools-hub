@@ -2,7 +2,6 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
 import { BACKEND } from "../../config.js";
-import { runFinalAction } from "../../utils/finalAction";
 
 export default function TikTokDownloader(){
   const [url,setUrl]=useState(""); const [info,setInfo]=useState(null); const [loading,setLoading]=useState(false);
@@ -17,7 +16,7 @@ export default function TikTokDownloader(){
       <h1 className="text-3xl font-bold text-indigo-600 mb-6">TikTok Downloader</h1>
       <input value={url} onChange={(e)=>setUrl(e.target.value)} className="w-full p-3 border rounded mb-3" />
       <button onClick={fetchVideo} className="bg-indigo-600 text-white px-6 py-2 rounded">Fetch</button>
-      {info && <a className="block mt-3 bg-green-600 text-white px-4 py-2 rounded" href={`${BACKEND}/download?url=${encodeURIComponent(url)}&format=best`} onClick={runFinalAction(() => {})}>Download</a>}
+      {info && <a className="block mt-3 bg-green-600 text-white px-4 py-2 rounded" href={`${BACKEND}/download?url=${encodeURIComponent(url)}&format=best`}>Download</a>}
     </div>
   </>);
 }

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
-import { runFinalAction } from "../../utils/finalAction";
 
 export default function QuoteGenerator() {
   const [category, setCategory] = useState("motivational");
@@ -243,7 +242,7 @@ export default function QuoteGenerator() {
             <p className="text-xl italic mb-4 leading-relaxed">{quote}</p>
 
             <button
-              onClick={runFinalAction(copyQuote)}
+              onClick={copyQuote}
               className="bg-gray-900 text-white px-4 py-2 rounded hover:bg-black"
             >
               {copied ? "Copied!" : "Copy Quote"}

@@ -2,7 +2,6 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
 import { BACKEND } from "../../config.js";
-import { runFinalAction } from "../../utils/finalAction";
 
 export default function WatermarkRemover(){
   const [file,setFile]=useState(null);
@@ -25,7 +24,7 @@ export default function WatermarkRemover(){
     <div className="max-w-3xl mx-auto p-4">
       <h1 className="text-3xl font-bold text-indigo-600 mb-6">Watermark Remover</h1>
       <input type="file" accept="image/*" onChange={(e)=>setFile(e.target.files[0])} />
-      <button onClick={runFinalAction(remove)} className="mt-3 bg-indigo-600 text-white px-4 py-2 rounded">Remove Watermark</button>
+      <button onClick={remove} className="mt-3 bg-indigo-600 text-white px-4 py-2 rounded">Remove Watermark</button>
       {loading && <p>Processing...</p>}
       {result && <a href={result} download="clean.png" className="block mt-3 bg-green-600 text-white px-4 py-2 rounded">Download</a>}
     </div>

@@ -1,7 +1,6 @@
 // /pages/tools/image-resizer.js
 import { useState } from "react";
 import SEO from "../../components/SEO";
-import { runFinalAction } from "../../utils/finalAction";
 
 
 export default function ImageResizer() {
@@ -141,7 +140,6 @@ export default function ImageResizer() {
           <a
             href={resultUrl}
             download="resized.jpg"
-            onClick={runFinalAction(() => {})}
             className="block mt-4 bg-green-600 text-white px-4 py-2 rounded text-center"
           >
             Download Resized Image

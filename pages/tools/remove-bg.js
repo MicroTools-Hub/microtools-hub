@@ -2,7 +2,6 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
 import { BACKEND } from "../../config.js";
-import { runFinalAction } from "../../utils/finalAction";
 
 export default function RemoveBg(){
   const [file,setFile]=useState(null);
@@ -24,7 +23,7 @@ export default function RemoveBg(){
       <h1 className="text-3xl font-bold text-indigo-600 mb-6">Remove Background</h1>
       <input type="file" accept="image/*" onChange={(e)=>setFile(e.target.files[0])} />
       <button onClick={submit} className="mt-3 bg-indigo-600 text-white px-4 py-2 rounded">Remove Background</button>
-      {out && <a href={out} download="no-bg.png" className="mt-3 block bg-green-600 text-white px-4 py-2 rounded" onClick={runFinalAction(() => {})}>Download</a>}
+      {out && <a href={out} download="no-bg.png" className="mt-3 block bg-green-600 text-white px-4 py-2 rounded">Download</a>}
     </div>
   </>);
 }

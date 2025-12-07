@@ -2,7 +2,6 @@ import { useState } from "react";
 import SEO from "../../components/SEO";
 import { BACKEND } from "../../config.js";
 import { PhotoIcon, CloudArrowUpIcon } from "@heroicons/react/24/solid";
-import { runFinalAction } from "../../utils/finalAction";
 
 
 export default function ImageCompressor() {
@@ -215,7 +214,6 @@ export default function ImageCompressor() {
            <a
              href={results}
              download="compressed-images.zip"
-             onClick={runFinalAction(() => {})}
              className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg shadow"
            >
              Download Compressed ZIP

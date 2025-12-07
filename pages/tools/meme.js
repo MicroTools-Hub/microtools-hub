@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import SEO from "../../components/SEO";
 import { CloudArrowUpIcon } from "@heroicons/react/24/solid";
-import { runFinalAction } from "../../utils/finalAction";
 
 export default function MemeGenerator() {
   const [image, setImage] = useState(null);
@@ -261,7 +260,7 @@ export default function MemeGenerator() {
 
         {image && (
   <button
-    onClick={runFinalAction(downloadMeme)}
+    onClick={downloadMeme}
     className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl text-lg font-semibold transition"
   >
     Download Meme
