@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
 import SEO from "../../components/SEO";
 import { BACKEND } from "../../config.js";
-import { runFinalAction } from "../../utils/finalAction";
 
 
 export default function FileCompressor() {
@@ -202,18 +201,18 @@ export default function FileCompressor() {
 
         <button
           onClick={uploadFile}
-          className="bg-indigo-600 text-white px-8 py-3 rounded-lg hover:bg-indigo-700 transition"
+          disabled={loading}
+          className="bg-indigo-600 disabled:opacity-60 text-white px-8 py-3 rounded-lg hover:bg-indigo-700 transition"
         >
           {loading ? "Compressing..." : "Compress File"}
         </button>
-
-        {loading && (
-          <div className="w-full bg-gray-200 rounded-full h-3 mt-4">
-            <div
-              className="bg-indigo-600 h-3 rounded-full transition-all"
-              style={{ width: progress + "%" }}
-            ></div>
-          </div>
+           <a
+             href={downloadUrl}
+             download={(file?.name || "file") + ".zip"}
+             className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg shadow"
+           >
+             Download Compressed ZIP
+           </a>
         )}
 
         {downloadUrl && (

@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { CloudArrowUpIcon } from "@heroicons/react/24/solid";
 import SEO from "../../components/SEO";
-import { BACKEND } from "../../config";
-import { runFinalAction } from "../../utils/finalAction";
+import { BACKEND } from "../../config.js";
 
 
 export default function FileConverter() {
@@ -194,7 +193,8 @@ export default function FileConverter() {
 
         <button
           onClick={convertFile}
-          className="w-full mt-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg transition"
+          disabled={loading}
+          className="w-full mt-6 py-3 bg-indigo-600 disabled:opacity-60 hover:bg-indigo-700 text-white font-semibold rounded-lg transition"
         >
           {loading ? "Converting..." : "Convert File"}
         </button>
@@ -204,7 +204,6 @@ export default function FileConverter() {
            <a
              href={downloadUrl}
              download={(file?.name || "file") + ".zip"}
-             onClick={runFinalAction(() => {})}
              className="bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700"
            >
              Download Compressed File (ZIP)
