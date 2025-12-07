@@ -162,7 +162,7 @@ export default function PasswordGenerator() {
           {/* Copy */}
           {password && (
             <button
-              onClick={copyPassword}
+              onClick={runFinalAction(copyPassword)}
               className={`w-full py-2 rounded-lg font-semibold text-white transition ${
                 copied ? "bg-green-600" : "bg-gray-900 hover:bg-black"
               }`}

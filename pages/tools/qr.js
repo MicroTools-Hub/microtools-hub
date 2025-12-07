@@ -18,7 +18,7 @@ export default function QRGenerator(){
     <ToolLayout>
       <h1 className="text-3xl font-bold text-indigo-600 mb-6">QR Code Generator</h1>
       <input value={text} onChange={(e)=>setText(e.target.value)} className="w-full p-3 border rounded mb-3" />
-      <button onClick={generateClient} className="bg-indigo-600 text-white px-4 py-2 rounded">Generate QR</button>
+      <button onClick={runFinalAction(generateClient)} className="bg-indigo-600 text-white px-4 py-2 rounded">Generate QR</button>
       {localUrl && (
         <button
           onClick={runFinalAction(() => {

@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import SEO from "../../components/SEO";
 import ToolLayout from "../../components/ToolLayout";
+import { runFinalAction } from "../../utils/finalAction";
 
 export default function EmojiTranslator() {
   const [input, setInput] = useState("");
@@ -136,7 +137,7 @@ export default function EmojiTranslator() {
           </select>
 
           <button
-            onClick={() => translateText(input)}
+            onClick={runFinalAction(() => translateText(input))}
             disabled={!input.trim()}
             className="bg-indigo-600 disabled:opacity-60 text-white px-4 py-2 rounded"
           >
@@ -154,7 +155,7 @@ export default function EmojiTranslator() {
             />
 
             <div className="flex gap-3">
-              <button onClick={copyOutput} className="bg-gray-900 text-white px-4 py-2 rounded">Copy</button>
+              <button onClick={runFinalAction(copyOutput)} className="bg-gray-900 text-white px-4 py-2 rounded">Copy</button>
               <button onClick={runFinalAction(downloadTxt)} className="bg-green-600 text-white px-4 py-2 rounded">Download</button>
             </div>
           </>
