@@ -1,8 +1,6 @@
-// /pages/tools/x.js
 import { useState } from "react";
 import SEO from "../../components/SEO";
 import { BACKEND } from "../../config.js";
-import { runFinalAction } from "../../utils/finalAction";
 
 export default function XDownloader() {
   const [url, setUrl] = useState("");
@@ -18,12 +16,12 @@ export default function XDownloader() {
     setError("");
     setLoading(true);
 
-    // ✅ Direct file download (correct way)
+    // ✅ direct backend download
     window.location.href = `${BACKEND}/api/download/twitter?url=${encodeURIComponent(
       url
     )}`;
 
-    // stop loader after short delay
+    // stop loader shortly (UI only)
     setTimeout(() => setLoading(false), 1500);
   };
 
@@ -35,8 +33,8 @@ export default function XDownloader() {
         keywords="x video downloader, twitter video download, twitter mp4"
       />
 
-      <div className="max-w-3xl mx-auto p-4">
-        <h1 className="text-3xl font-bold text-indigo-600 mb-6">
+      <div className="max-w-3xl mx-auto p-6 space-y-4">
+        <h1 className="text-3xl font-bold text-indigo-600">
           X / Twitter Video Downloader
         </h1>
 
@@ -44,20 +42,21 @@ export default function XDownloader() {
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           placeholder="Paste X / Twitter post URL"
-          className="w-full p-3 border rounded mb-3 focus:ring focus:ring-indigo-300"
+          className="w-full p-3 border rounded focus:ring focus:ring-indigo-300"
         />
 
         <button
-          onClick={runFinalAction(downloadVideo)}
-          className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded"
+          onClick={downloadVideo}
+          disabled={loading}
+          className="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-60 text-white px-6 py-2 rounded"
         >
-          {loading ? "Downloading..." : "Download Video"}
+          {loading ? "Downloading…" : "Download Video"}
         </button>
 
-        {error && <p className="mt-3 text-red-600">{error}</p>}
+        {error && <p className="text-red-600">{error}</p>}
 
-        <p className="mt-4 text-sm text-gray-600">
-          ✅ Works for both twitter.com and x.com links
+        <p className="text-sm text-gray-600">
+          ✅ Works with both twitter.com and x.com links
         </p>
       </div>
     </>
