@@ -1,35 +1,19 @@
 // Lightweight ad launcher used by `runFinalAction`.
-// Opens a new window immediately (so browsers don't block it) and
-// navigates it to the ad content (URL or HTML) provided.
+// Injects the vignette ad script inline on the current page (no popup window).
+// The script runs immediately after the final user action (download/copy/generate).
 
 export async function showAd({ url = "/ad.html", html = null, closeAfterMs = 8000 } = {}) {
   try {
     if (typeof window === "undefined") return false;
 
-    // Open an empty window immediately to avoid popup blockers
-    const w = window.open("", "_blank");
-    if (!w) return false; // blocked
+    // Extract the vignette script from ad.html or use provided HTML
+    const adScript = `(function(s){s.dataset.zone='10289133',s.src='https://gizokraijaw.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`;
 
-    // If HTML snippet provided, write it into the new window
-    if (html) {
-      w.document.open();
-      w.document.write(html);
-      w.document.close();
-    } else if (url) {
-      // Navigate to the provided URL (defaults to /ad.html)
-      w.location.href = url;
-    }
-
-    // Optionally close the ad after a timeout so it doesn't linger
-    if (closeAfterMs && closeAfterMs > 0) {
-      setTimeout(() => {
-        try {
-          w.close();
-        } catch (e) {
-          // ignore
-        }
-      }, closeAfterMs);
-    }
+    // Create and inject the script element into the page
+    const script = document.createElement("script");
+    script.textContent = adScript;
+    script.async = true;
+    document.body.appendChild(script);
 
     return true;
   } catch (err) {
