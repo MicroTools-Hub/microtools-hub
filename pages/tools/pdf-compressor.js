@@ -1,7 +1,7 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import ToolLayout from "../../components/ToolLayout";
 import { BACKEND } from "../../config.js";
-import { runFinalAction } from "../../utils/finalAction";
 
 export default function PDFCompressor() {
   const [file, setFile] = useState(null);
@@ -129,8 +129,7 @@ export default function PDFCompressor() {
         }}
       />
 
-      <div className="max-w-3xl mx-auto">
-
+      <ToolLayout>
         <h1 className="text-4xl font-extrabold text-indigo-600 mb-6">
           PDF Compressor
         </h1>
@@ -200,7 +199,6 @@ export default function PDFCompressor() {
             <a
               href={downloadUrl}
               download="compressed.pdf"
-              onClick={runFinalAction(() => {})}
               className="inline-block bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition"
             >
               Download Compressed PDF
@@ -222,7 +220,7 @@ export default function PDFCompressor() {
             <li>Your files are processed safely and auto-deleted.</li>
           </ul>
         </section>
-      </div>
+      </ToolLayout>
     </>
   );
 }

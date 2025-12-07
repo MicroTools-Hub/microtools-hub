@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
-import { runFinalAction } from "../../utils/finalAction";
+import ToolLayout from "../../components/ToolLayout";
 
 export default function Summarizer() {
   const [inputText, setInputText] = useState("");
@@ -72,7 +72,7 @@ export default function Summarizer() {
         }}
       />
 
-      <div className="max-w-4xl mx-auto p-4">
+      <ToolLayout>
         <h1 className="text-3xl font-bold text-indigo-600 mb-6">
           Smart Text Summarizer
         </h1>
@@ -110,7 +110,7 @@ export default function Summarizer() {
           />
 
           <button
-            onClick={runFinalAction(summarize)}
+            onClick={summarize}
             className="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition"
           >
             Summarize
@@ -140,7 +140,7 @@ export default function Summarizer() {
             No login, no backend — everything runs privately in your browser.
           </p>
         </section>
-      </div>
+      </ToolLayout>
     </>
   );
 }

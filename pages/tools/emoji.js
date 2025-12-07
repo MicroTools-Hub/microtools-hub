@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import SEO from "../../components/SEO";
+import ToolLayout from "../../components/ToolLayout";
 
 export default function EmojiTranslator() {
   const [input, setInput] = useState("");
@@ -112,7 +113,7 @@ export default function EmojiTranslator() {
         description="Convert text to emojis instantly. Supports English, Hindi & Tamil."
       />
 
-      <div className="max-w-3xl mx-auto p-6 space-y-4">
+      <ToolLayout>
         <h1 className="text-2xl font-bold">Emoji Translator</h1>
 
         <textarea
@@ -136,7 +137,8 @@ export default function EmojiTranslator() {
 
           <button
             onClick={() => translateText(input)}
-            className="bg-indigo-600 text-white px-4 py-2 rounded"
+            disabled={!input.trim()}
+            className="bg-indigo-600 disabled:opacity-60 text-white px-4 py-2 rounded"
           >
             Translate
           </button>
@@ -152,12 +154,12 @@ export default function EmojiTranslator() {
             />
 
             <div className="flex gap-3">
-              <button onClick={copyOutput} className="btn">Copy</button>
-              <button onClick={downloadTxt} className="btn">Download</button>
+              <button onClick={copyOutput} className="bg-gray-900 text-white px-4 py-2 rounded">Copy</button>
+              <button onClick={downloadTxt} className="bg-green-600 text-white px-4 py-2 rounded">Download</button>
             </div>
           </>
         )}
-      </div>
+      </ToolLayout>
     </>
   );
 }

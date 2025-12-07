@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import SEO from "../../components/SEO";
+import ToolLayout from "../../components/ToolLayout";
 import { BACKEND } from "../../config.js";
-import { runFinalAction } from "../../utils/finalAction";
 
 
 export default function FileCompressor() {
@@ -147,7 +147,7 @@ export default function FileCompressor() {
       />
 
       {/* UI (UNCHANGED) */}
-      <div className="max-w-3xl mx-auto p-6">
+      <ToolLayout>
         <h1 className="text-3xl font-bold text-indigo-600 mb-6 text-center">
           File Compressor
         </h1>
@@ -202,31 +202,21 @@ export default function FileCompressor() {
 
         <button
           onClick={uploadFile}
-          className="bg-indigo-600 text-white px-8 py-3 rounded-lg hover:bg-indigo-700 transition"
+          disabled={loading}
+          className="bg-indigo-600 disabled:opacity-60 text-white px-8 py-3 rounded-lg hover:bg-indigo-700 transition"
         >
           {loading ? "Compressing..." : "Compress File"}
         </button>
 
-        {loading && (
-          <div className="w-full bg-gray-200 rounded-full h-3 mt-4">
-            <div
-              className="bg-indigo-600 h-3 rounded-full transition-all"
-              style={{ width: progress + "%" }}
-            ></div>
-          </div>
-        )}
-
         {downloadUrl && (
-          <div className="mt-6">
+          <div className="mt-8 text-center">
             <a
               href={downloadUrl}
-              download={(file?.name || "file") + ".zip"}
-              onClick={runFinalAction(() => {})}
-              className="bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700"
+              download="compressed.zip"
+              className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg shadow"
             >
-              Download Compressed File (ZIP)
+              Download Compressed ZIP
             </a>
-
           </div>
         )}
 
@@ -261,7 +251,7 @@ export default function FileCompressor() {
             </div>
           </div>
         </section>
-      </div>
+      </ToolLayout>
     </>
   );
 }

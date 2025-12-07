@@ -1,7 +1,7 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import ToolLayout from "../../components/ToolLayout";
 import { BACKEND } from "../../config.js";
-import { runFinalAction } from "../../utils/finalAction";
 
 export default function ShortsDownloader() {
   const [url, setUrl] = useState("");
@@ -70,7 +70,7 @@ export default function ShortsDownloader() {
         image="/og/shorts.png"
       />
 
-      <div className="max-w-3xl mx-auto p-4">
+      <ToolLayout>
         <h1 className="text-3xl font-bold text-indigo-600 mb-6">
           YouTube Shorts Downloader
         </h1>
@@ -96,7 +96,7 @@ export default function ShortsDownloader() {
         />
 
         <button
-          onClick={runFinalAction(fetchVideo)}
+          onClick={fetchVideo}
           className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:opacity-90 transition w-full sm:w-auto"
         >
           Fetch Video
@@ -145,7 +145,7 @@ export default function ShortsDownloader() {
             </div>
           </div>
         )}
-      </div>
+      </ToolLayout>
     </>
   );
 }

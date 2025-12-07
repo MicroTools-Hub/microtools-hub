@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import ToolLayout from "../../components/ToolLayout";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 export default function PasswordGenerator() {
@@ -126,7 +127,7 @@ export default function PasswordGenerator() {
         }}
       />
 
-      <div className="max-w-3xl mx-auto">
+      <ToolLayout>
         <h1 className="text-4xl font-extrabold text-indigo-600 mb-6">
           Password Generator
         </h1>
@@ -260,7 +261,7 @@ export default function PasswordGenerator() {
             <li>Copy & use it anywhere securely.</li>
           </ul>
         </section>
-      </div>
+      </ToolLayout>
     </>
   );
 }

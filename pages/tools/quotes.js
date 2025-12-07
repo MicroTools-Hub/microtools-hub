@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
-import { runFinalAction } from "../../utils/finalAction";
+import ToolLayout from "../../components/ToolLayout";
 
 export default function QuoteGenerator() {
   const [category, setCategory] = useState("motivational");
@@ -212,7 +212,7 @@ export default function QuoteGenerator() {
         image="/og/quotes.png"
       />
 
-      <div className="max-w-3xl mx-auto">
+      <ToolLayout>
         <h1 className="text-4xl font-bold text-indigo-600 mb-6">
           Random Quote Generator
         </h1>
@@ -243,7 +243,7 @@ export default function QuoteGenerator() {
             <p className="text-xl italic mb-4 leading-relaxed">{quote}</p>
 
             <button
-              onClick={runFinalAction(copyQuote)}
+              onClick={copyQuote}
               className="bg-gray-900 text-white px-4 py-2 rounded hover:bg-black"
             >
               {copied ? "Copied!" : "Copy Quote"}
@@ -251,7 +251,7 @@ export default function QuoteGenerator() {
 
           </div>
         )}
-      </div>
+      </ToolLayout>
     </>
   );
 }
