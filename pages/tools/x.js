@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import SEO from "../../components/SEO";
 import ToolLayout from "../../components/ToolLayout";
 import { BACKEND } from "../../config.js";
@@ -17,7 +17,7 @@ export default function XDownloader() {
     setError("");
     setLoading(true);
 
-    // ✅ direct backend download
+    //  direct backend download
     window.location.href = `${BACKEND}/api/download/twitter?url=${encodeURIComponent(
       url
     )}`;
@@ -51,17 +51,15 @@ export default function XDownloader() {
           disabled={loading}
           className="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-60 text-white px-6 py-2 rounded"
         >
-          {loading ? "Downloading…" : "Download Video"}
+          {loading ? "Downloading" : "Download Video"}
         </button>
 
         {error && <p className="text-red-600">{error}</p>}
 
         <p className="text-sm text-gray-600">
-          ✅ Works with both twitter.com and x.com links
+           Works with both twitter.com and x.com links
         </p>
       </ToolLayout>
     </>
   );
 }
-
-
