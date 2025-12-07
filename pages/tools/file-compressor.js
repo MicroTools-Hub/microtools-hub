@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import SEO from "../../components/SEO";
+import ToolLayout from "../../components/ToolLayout";
 import { BACKEND } from "../../config.js";
 
 
@@ -146,7 +147,7 @@ export default function FileCompressor() {
       />
 
       {/* UI (UNCHANGED) */}
-      <div className="max-w-3xl mx-auto p-6">
+      <ToolLayout>
         <h1 className="text-3xl font-bold text-indigo-600 mb-6 text-center">
           File Compressor
         </h1>
@@ -260,7 +261,7 @@ export default function FileCompressor() {
             </div>
           </div>
         </section>
-      </div>
+      </ToolLayout>
     </>
   );
 }

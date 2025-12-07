@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import ToolLayout from "../../components/ToolLayout";
 
 export default function QuoteGenerator() {
   const [category, setCategory] = useState("motivational");
@@ -211,7 +212,7 @@ export default function QuoteGenerator() {
         image="/og/quotes.png"
       />
 
-      <div className="max-w-3xl mx-auto">
+      <ToolLayout>
         <h1 className="text-4xl font-bold text-indigo-600 mb-6">
           Random Quote Generator
         </h1>
@@ -250,7 +251,7 @@ export default function QuoteGenerator() {
 
           </div>
         )}
-      </div>
+      </ToolLayout>
     </>
   );
 }

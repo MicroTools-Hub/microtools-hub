@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import ToolLayout from "../../components/ToolLayout";
 import { BACKEND } from "../../config.js";
 import { PhotoIcon, CloudArrowUpIcon } from "@heroicons/react/24/solid";
 
@@ -129,8 +130,7 @@ export default function ImageCompressor() {
       />
 
       {/* UI — DO NOT TOUCH (Your design stays unchanged) */}
-      <div className="max-w-3xl mx-auto">
-
+      <ToolLayout>
         <h1 className="text-4xl font-extrabold text-indigo-600 mb-6 text-center">
           Image Compressor
         </h1>
@@ -222,7 +222,7 @@ export default function ImageCompressor() {
           </div>
         )}
 
-      </div>
+      </ToolLayout>
     </>
   );
 }

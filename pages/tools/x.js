@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import ToolLayout from "../../components/ToolLayout";
 import { BACKEND } from "../../config.js";
 
 export default function XDownloader() {
@@ -33,7 +34,7 @@ export default function XDownloader() {
         keywords="x video downloader, twitter video download, twitter mp4"
       />
 
-      <div className="max-w-3xl mx-auto p-6 space-y-4">
+      <ToolLayout>
         <h1 className="text-3xl font-bold text-indigo-600">
           X / Twitter Video Downloader
         </h1>
@@ -58,7 +59,7 @@ export default function XDownloader() {
         <p className="text-sm text-gray-600">
           ✅ Works with both twitter.com and x.com links
         </p>
-      </div>
+      </ToolLayout>
     </>
   );
 }

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import ToolLayout from "../../components/ToolLayout";
 import { BACKEND } from "../../config.js";
 
 export default function ShortsDownloader() {
@@ -69,7 +70,7 @@ export default function ShortsDownloader() {
         image="/og/shorts.png"
       />
 
-      <div className="max-w-3xl mx-auto p-4">
+      <ToolLayout>
         <h1 className="text-3xl font-bold text-indigo-600 mb-6">
           YouTube Shorts Downloader
         </h1>
@@ -144,7 +145,7 @@ export default function ShortsDownloader() {
             </div>
           </div>
         )}
-      </div>
+      </ToolLayout>
     </>
   );
 }

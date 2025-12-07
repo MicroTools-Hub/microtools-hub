@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import SEO from "../../components/SEO";
+import ToolLayout from "../../components/ToolLayout";
 
 export default function EmojiTranslator() {
   const [input, setInput] = useState("");
@@ -112,7 +113,7 @@ export default function EmojiTranslator() {
         description="Convert text to emojis instantly. Supports English, Hindi & Tamil."
       />
 
-      <div className="max-w-3xl mx-auto p-6 space-y-4">
+      <ToolLayout>
         <h1 className="text-2xl font-bold">Emoji Translator</h1>
 
         <textarea
@@ -158,7 +159,7 @@ export default function EmojiTranslator() {
             </div>
           </>
         )}
-      </div>
+      </ToolLayout>
     </>
   );
 }

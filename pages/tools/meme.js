@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import SEO from "../../components/SEO";
+import ToolLayout from "../../components/ToolLayout";
 import { CloudArrowUpIcon } from "@heroicons/react/24/solid";
 
 export default function MemeGenerator() {
@@ -172,8 +173,7 @@ export default function MemeGenerator() {
       />
 
       {/* UI (unchanged) */}
-      <div className="max-w-3xl mx-auto">
-
+      <ToolLayout>
         <h1 className="text-4xl font-extrabold text-indigo-600 mb-6 text-center">
           Meme Caption Generator
         </h1>
@@ -267,7 +267,7 @@ export default function MemeGenerator() {
   </button>
 )}
 
-      </div>
+      </ToolLayout>
     </>
   );
 }

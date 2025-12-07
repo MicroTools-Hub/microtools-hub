@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CloudArrowUpIcon } from "@heroicons/react/24/solid";
 import SEO from "../../components/SEO";
+import ToolLayout from "../../components/ToolLayout";
 import { BACKEND } from "../../config.js";
 
 
@@ -130,8 +131,7 @@ export default function FileConverter() {
       />
 
       {/* UI SECTION (UNCHANGED) */}
-      <div className="max-w-3xl mx-auto">
-
+      <ToolLayout>
         <h1 className="text-4xl font-extrabold text-indigo-600 mb-6 text-center">
           Universal File Converter
         </h1>
@@ -211,7 +211,7 @@ export default function FileConverter() {
 
           </div>
         )}
-      </div>
+      </ToolLayout>
     </>
   );
 }

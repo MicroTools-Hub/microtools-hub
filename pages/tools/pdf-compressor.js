@@ -128,8 +128,7 @@ export default function PDFCompressor() {
         }}
       />
 
-      <div className="max-w-3xl mx-auto">
-
+      <ToolLayout>
         <h1 className="text-4xl font-extrabold text-indigo-600 mb-6">
           PDF Compressor
         </h1>
@@ -220,7 +219,7 @@ export default function PDFCompressor() {
             <li>Your files are processed safely and auto-deleted.</li>
           </ul>
         </section>
-      </div>
+      </ToolLayout>
     </>
   );
 }

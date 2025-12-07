@@ -1,6 +1,7 @@
 // /pages/tools/image-resizer.js
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import ToolLayout from "../../components/ToolLayout";
 
 
 export default function ImageResizer() {
@@ -65,7 +66,7 @@ export default function ImageResizer() {
         description="Resize images by width or height online. Maintain aspect ratio or set custom dimensions. Free image resizer."
       />
 
-      <div className="max-w-3xl mx-auto p-4">
+      <ToolLayout>
         <h1 className="text-3xl font-bold text-indigo-600 mb-6">
           Image Resizer
         </h1>
@@ -145,7 +146,7 @@ export default function ImageResizer() {
             Download Resized Image
           </a>
         )}
-      </div>
+      </ToolLayout>
     </>
   );
 }

@@ -1,6 +1,7 @@
 // /pages/tools/facebook.js
 import { useState } from "react";
 import SEO from "../../components/SEO";
+import ToolLayout from "../../components/ToolLayout";
 import { BACKEND } from "../../config.js";
 
 export default function FacebookDownloader() {
@@ -66,7 +67,7 @@ export default function FacebookDownloader() {
         description="Download Facebook videos fast"
       />
 
-      <div className="max-w-3xl mx-auto p-4">
+      <ToolLayout>
         <h1 className="text-3xl font-bold text-indigo-600 mb-6">
           Facebook Video Downloader
         </h1>
@@ -96,7 +97,7 @@ export default function FacebookDownloader() {
             Download
           </button>
         )}
-      </div>
+      </ToolLayout>
     </>
   );
 }
