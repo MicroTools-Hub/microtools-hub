@@ -1,11 +1,12 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
 import ToolLayout from "../../components/ToolLayout";
+import { runFinalAction } from "../../utils/finalAction";
 
 export default function QuoteGenerator() {
   const [category, setCategory] = useState("motivational");
-  );
-}
+  const [quote, setQuote] = useState("");
+  const [copied, setCopied] = useState(false);
 
   const QUOTES = {
     motivational: [
