@@ -8,7 +8,7 @@ const tools = [
   { name: "YouTube Shorts Downloader", link: "/tools/shorts", icon: "🎬" },
   { name: "Instagram Downloader", link: "/tools/instagram", icon: "📸" },
   { name: "TikTok Downloader", link: "/tools/tiktok", icon: "🎵" },
-  { name: "Twitter / X Downloader", link: "/tools/twitter", icon: "🐦" },
+  { name: "Twitter / X Downloader", link: "/tools/x", icon: "🐦" },
   { name: "Facebook Video Downloader", link: "/tools/facebook", icon: "📘" },
   
   { name: "PDF Compressor", link: "/tools/pdf-compressor", icon: "📄" },
