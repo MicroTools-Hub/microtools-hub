@@ -248,7 +248,11 @@ export default function PasswordGenerator() {
             Generate Password
           </button>
         </div>
-}
+
+        {/* Instructions */}
+        <section className="mt-12">
+          <h2 className="text-2xl font-bold text-indigo-600 mb-3">
+            How to Use This Password Generator
           </h2>
 
           <ul className="list-disc ml-5 text-gray-700 leading-7">
