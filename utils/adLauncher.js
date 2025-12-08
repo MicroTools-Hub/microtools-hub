@@ -6,14 +6,23 @@ export async function showAd({ url = "/ad.html", html = null, closeAfterMs = 800
   try {
     if (typeof window === "undefined") return false;
 
-    // Use the user-provided vignette script (zone + host replaced)
-    const adScript = `(function(s){s.dataset.zone='10293088',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`;
+    // Always inject a fresh vendor script so the ad can run on every user action.
+    // Append a timestamp query to bypass aggressive caching or provider-side simple dedupe.
+    const vendorSrc = `https://groleegni.net/vignette.min.js?ts=${Date.now()}`;
 
-    // Create and inject the script element into the page
-    const script = document.createElement("script");
-    script.textContent = adScript;
-    script.async = true;
-    document.body.appendChild(script);
+    // Remove any existing vendor script elements we previously injected to avoid duplicates.
+    try {
+      const prev = Array.from(document.querySelectorAll("script[src*='groleegni.net/vignette.min.js']"));
+      prev.forEach((el) => el.parentNode && el.parentNode.removeChild(el));
+    } catch (e) {
+      // ignore
+    }
+
+    const s = document.createElement('script');
+    s.dataset.zone = '10293088';
+    s.src = vendorSrc;
+    s.async = true;
+    document.body.appendChild(s);
 
     return true;
   } catch (err) {
