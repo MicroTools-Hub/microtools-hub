@@ -132,9 +132,9 @@ export default function ImageCompressor() {
 
       {/* UI — DO NOT TOUCH (Your design stays unchanged) */}
       <ToolLayout>
-        <h1 className="text-4xl font-extrabold text-indigo-600 mb-6 text-center">
-          Image Compressor
-        </h1>
+        <div className="min-h-screen bg-gray-50 pt-24 px-4 sm:px-6">
+          <div className="max-w-3xl mx-auto">
+            <h1 className="text-3xl sm:text-4xl font-bold text-indigo-600 mb-6 text-center sm:text-left">Image Compressor</h1>
 
         <div className="p-5 bg-white shadow rounded-xl border mb-8">
           <h2 className="font-semibold text-lg mb-2">How to Use</h2>
@@ -230,6 +230,8 @@ export default function ImageCompressor() {
           </div>
         )}
 
+          </div>
+        </div>
       </ToolLayout>
     </>
   );

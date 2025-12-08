@@ -35,11 +35,10 @@ export default function XDownloader() {
         keywords="x video downloader, twitter video download, twitter mp4"
       />
 
-      <ToolLayout>
-        <h1 className="text-3xl font-bold text-indigo-600">
-          X / Twitter Video Downloader
-        </h1>
-
+        <ToolLayout>
+          <div className="min-h-screen bg-gray-50 pt-24 px-4 sm:px-6">
+            <div className="max-w-3xl mx-auto">
+              <h1 className="text-3xl sm:text-4xl font-bold text-indigo-600 mb-6 text-center sm:text-left">X/Twitter Downloader</h1>
         <input
           value={url}
           onChange={(e) => setUrl(e.target.value)}
@@ -60,6 +59,8 @@ export default function XDownloader() {
         <p className="text-sm text-gray-600">
            Works with both twitter.com and x.com links
         </p>
+          </div>
+        </div>
       </ToolLayout>
     </>
   );

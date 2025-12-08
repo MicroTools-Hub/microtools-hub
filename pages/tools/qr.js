@@ -16,7 +16,9 @@ export default function QRGenerator(){
   return (<>
     <SEO title="QR Code Generator — MicroTools Hub" description="Generate QR codes quickly" />
     <ToolLayout>
-      <h1 className="text-3xl font-bold text-indigo-600 mb-6">QR Code Generator</h1>
+      <div className="min-h-screen bg-gray-50 pt-24 px-4 sm:px-6">
+        <div className="max-w-3xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl font-bold text-indigo-600 mb-6 text-center sm:text-left">QR Code Generator</h1>
       <input value={text} onChange={(e)=>setText(e.target.value)} className="w-full p-3 border rounded mb-3" />
       <button onClick={runFinalAction(generateClient)} className="bg-indigo-600 text-white px-4 py-2 rounded">Generate QR</button>
       {localUrl && (
@@ -35,6 +37,8 @@ export default function QRGenerator(){
           Download QR
         </button>
       )}
+        </div>
+      </div>
     </ToolLayout>
   </>);
 }

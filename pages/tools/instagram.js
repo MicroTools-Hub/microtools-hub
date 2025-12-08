@@ -33,7 +33,9 @@ export default function InstagramDownloader() {
     <>
       <SEO title="Instagram Downloader — MicroTools Hub" description="Download Instagram photos & videos" />
       <ToolLayout>
-        <h1 className="text-3xl font-bold text-indigo-600 mb-6">Instagram Downloader</h1>
+        <div className="min-h-screen bg-gray-50 pt-24 px-4 sm:px-6">
+          <div className="max-w-3xl mx-auto">
+            <h1 className="text-3xl sm:text-4xl font-bold text-indigo-600 mb-6 text-center sm:text-left">Instagram Downloader</h1>
         <input value={url} onChange={(e)=>setUrl(e.target.value)} className="w-full p-3 border rounded mb-3" placeholder="Paste Instagram post / reel URL" />
         <button onClick={fetchVideo} className="bg-indigo-600 text-white px-6 py-2 rounded">Fetch</button>
         {loading && <p className="mt-3">Fetching...</p>}
@@ -53,6 +55,8 @@ export default function InstagramDownloader() {
             Download
           </button>
         )}
+          </div>
+        </div>
       </ToolLayout>
     </>
   );

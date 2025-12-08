@@ -129,9 +129,9 @@ export default function PasswordGenerator() {
       />
 
       <ToolLayout>
-        <h1 className="text-4xl font-extrabold text-indigo-600 mb-6">
-          Password Generator
-        </h1>
+        <div className="min-h-screen bg-gray-50 pt-24 px-4 sm:px-6">
+          <div className="max-w-3xl mx-auto">
+            <h1 className="text-3xl sm:text-4xl font-bold text-indigo-600 mb-6 text-center sm:text-left">Password Generator</h1>
 
         {/* Card */}
         <div className="p-6 bg-white/80 backdrop-blur rounded-xl shadow-lg space-y-6 border">
@@ -247,7 +247,7 @@ export default function PasswordGenerator() {
           >
             Generate Password
           </button>
-        </div>
+          </div>
 
         {/* Instructions */}
         <section className="mt-12">
@@ -262,6 +262,8 @@ export default function PasswordGenerator() {
             <li>Copy & use it anywhere securely.</li>
           </ul>
         </section>
+          </div>
+        </div>
       </ToolLayout>
     </>
   );

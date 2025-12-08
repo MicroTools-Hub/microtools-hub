@@ -149,11 +149,11 @@ export default function FileCompressor() {
 
       {/* UI (UNCHANGED) */}
       <ToolLayout>
-        <h1 className="text-3xl font-bold text-indigo-600 mb-6 text-center">
-          File Compressor
-        </h1>
+        <div className="min-h-screen bg-gray-50 pt-24 px-4 sm:px-6">
+          <div className="max-w-3xl mx-auto">
+            <h1 className="text-3xl sm:text-4xl font-bold text-indigo-600 mb-6 text-center sm:text-left">File Compressor</h1>
 
-        <div className="p-4 bg-white border rounded-xl shadow mb-6">
+        <div className="p-4 bg-white rounded-2xl shadow-sm border mb-6">
           <h2 className="font-semibold text-lg mb-2">How to Use</h2>
           <ul className="list-disc ml-5 text-gray-700 leading-7">
             <li>Upload any file — PDF, DOCX, PPTX, XLSX, MP4, ZIP, JPG, PNG, etc.</li>
@@ -259,6 +259,8 @@ export default function FileCompressor() {
             </div>
           </div>
         </section>
+          </div>
+        </div>
       </ToolLayout>
     </>
   );

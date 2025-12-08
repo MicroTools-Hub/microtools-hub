@@ -213,9 +213,9 @@ export default function QuoteGenerator() {
       />
 
       <ToolLayout>
-        <h1 className="text-4xl font-bold text-indigo-600 mb-6">
-          Random Quote Generator
-        </h1>
+        <div className="min-h-screen bg-gray-50 pt-24 px-4 sm:px-6">
+          <div className="max-w-3xl mx-auto">
+            <h1 className="text-3xl sm:text-4xl font-bold text-indigo-600 mb-6 text-center sm:text-left">Random Quote Generator</h1>
 
         <div className="flex gap-4 mb-6">
           <select
@@ -251,6 +251,8 @@ export default function QuoteGenerator() {
 
           </div>
         )}
+          </div>
+        </div>
       </ToolLayout>
     </>
   );
