@@ -6,8 +6,8 @@ export async function showAd({ url = "/ad.html", html = null, closeAfterMs = 800
   try {
     if (typeof window === "undefined") return false;
 
-    // Extract the vignette script from ad.html or use provided HTML
-    const adScript = `(function(s){s.dataset.zone='10289133',s.src='https://gizokraijaw.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`;
+    // Use the user-provided vignette script (zone + host replaced)
+    const adScript = `(function(s){s.dataset.zone='10293088',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`;
 
     // Create and inject the script element into the page
     const script = document.createElement("script");
