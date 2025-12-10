@@ -58,7 +58,7 @@ export default function Tools() {
           MicroTools Hub — All Tools
         </h1>
 
-        <div className="max-w-3xl mx-auto mt-8">
+        <div className="mx-auto mt-8">
           <input
             placeholder="Search tools (e.g., YouTube, PDF, Emoji...)"
             className="w-full p-4 border rounded-xl shadow-sm"
@@ -83,7 +83,7 @@ export default function Tools() {
           ))}
         </div>
 
-        <div className="mt-10 max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-10 mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((tool) => (
             <Link key={tool.name} href={tool.path}>
               <div className="p-6 bg-white rounded-2xl shadow border hover:shadow-xl hover:-translate-y-1 transition">

@@ -115,64 +115,67 @@ export default function EmojiTranslator() {
       />
 
       <ToolLayout>
-        <div className="min-h-screen bg-gray-50 pt-24 px-4 sm:px-6">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl font-bold text-indigo-600 mb-6 text-center sm:text-left">Emoji Translator</h1>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-indigo-600 mb-8">Emoji Translator</h1>
 
-        <textarea
-          value={input}
-          onChange={(e) => handleInputChange(e.target.value)}
-          rows={5}
-          placeholder="Type text here..."
-          className="w-full border rounded p-3"
-        />
-
-        <div className="flex gap-3 items-center">
-          <select
-            value={lang}
-            onChange={(e) => setLang(e.target.value)}
-            className="border p-2 rounded"
-          >
-            <option value="en">English</option>
-            <option value="hi">Hindi</option>
-            <option value="ta">Tamil</option>
-          </select>
-
-          <button
-            onClick={runFinalAction(() => translateText(input))}
-            disabled={!input.trim()}
-            className="bg-indigo-600 disabled:opacity-60 text-white px-4 py-2 rounded"
-          >
-            Translate
-          </button>
-        </div>
-
-        {output && (
-          <>
-            <textarea
-              value={output}
-              readOnly
-              rows={4}
-              className="w-full border rounded p-3 bg-gray-50"
-            />
-
-            <div className="flex gap-3">
-              <button onClick={runFinalAction(copyOutput)} className="bg-gray-900 text-white px-4 py-2 rounded">Copy</button>
-              <button onClick={runFinalAction(downloadTxt)} className="bg-green-600 text-white px-4 py-2 rounded">Download</button>
+            <div className="p-6 bg-white rounded-2xl shadow-lg border mb-8 text-left">
+                <h2 className="font-bold text-2xl text-indigo-600 mb-4">How It Works</h2>
+                <ul className="list-decimal ml-6 text-gray-700 text-lg leading-relaxed space-y-2">
+                    <li>Type your text in the input box.</li>
+                    <li>Select the language of your text.</li>
+                    <li>Click the <b>Translate</b> button to see the magic.</li>
+                    <li>Your text with emojis will appear below.</li>
+                </ul>
             </div>
-          </>
-        )}
+
+            <div className="flex flex-col sm:flex-row gap-4">
+                <textarea
+                value={input}
+                onChange={(e) => handleInputChange(e.target.value)}
+                rows={5}
+                placeholder="Type text here..."
+                className="w-full p-4 border rounded-lg text-lg flex-grow focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+            </div>
+            <div className="flex flex-wrap gap-4 items-center my-4">
+              <select
+                value={lang}
+                onChange={(e) => setLang(e.target.value)}
+                className="border p-3 rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              >
+                <option value="en">English</option>
+                <option value="hi">Hindi</option>
+                <option value="ta">Tamil</option>
+              </select>
+
+              <button
+                onClick={runFinalAction(() => translateText(input))}
+                disabled={!input.trim()}
+                className="bg-indigo-600 disabled:opacity-60 text-white px-6 py-3 rounded-lg text-lg font-semibold transition-all duration-300 ease-in-out transform hover:scale-105"
+              >
+                Translate
+              </button>
+            </div>
+
+            {output && (
+              <div className="mt-6 p-6 bg-white rounded-2xl shadow-lg border text-left">
+                <textarea
+                  value={output}
+                  readOnly
+                  rows={4}
+                  className="w-full border rounded-lg p-3 text-lg bg-gray-100"
+                />
+
+                <div className="flex flex-wrap gap-4 mt-4">
+                  <button onClick={runFinalAction(copyOutput)} className="bg-gray-800 hover:bg-gray-900 text-white px-6 py-3 rounded-lg text-lg font-semibold transition-all duration-300 ease-in-out">Copy</button>
+                  <button onClick={runFinalAction(downloadTxt)} className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg text-lg font-semibold transition-all duration-300 ease-in-out">Download</button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </ToolLayout>
     </>
   );
 }
-
-
-
-
-
-
-
-

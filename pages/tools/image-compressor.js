@@ -132,104 +132,102 @@ export default function ImageCompressor() {
 
       {/* UI — DO NOT TOUCH (Your design stays unchanged) */}
       <ToolLayout>
-        <div className="min-h-screen bg-gray-50 pt-24 px-4 sm:px-6">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl font-bold text-indigo-600 mb-6 text-center sm:text-left">Image Compressor</h1>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-indigo-600 mb-8 text-center">Image Compressor</h1>
 
-        <div className="p-5 bg-white shadow rounded-xl border mb-8">
-          <h2 className="font-semibold text-lg mb-2">How to Use</h2>
-          <ul className="list-disc ml-6 text-gray-700 leading-7">
-            <li>Drag & drop images or click to upload.</li>
-            <li>Adjust the quality slider (10% to 100%).</li>
-            <li>Click <strong>Compress Images</strong>.</li>
-            <li>Download your ZIP file containing all compressed images.</li>
-          </ul>
-        </div>
-
-        <div
-          className={`border-2 rounded-xl p-10 text-center transition ${
-            dragActive ? "border-indigo-500 bg-indigo-50" : "border-gray-300 bg-gray-50"
-          }`}
-          onDragOver={(e) => {
-            e.preventDefault();
-            setDragActive(true);
-          }}
-          onDragLeave={() => setDragActive(false)}
-          onDrop={handleDrop}
-        >
-          <CloudArrowUpIcon className="w-16 h-16 text-indigo-600 mx-auto mb-3" />
-          <p className="text-gray-700 font-medium">Drag & drop images</p>
-          <p className="text-gray-500 text-sm mb-4">or click to browse</p>
-
-          <input
-            type="file"
-            multiple
-            accept="image/png, image/jpeg, image/webp"
-            onChange={handleUpload}
-            className="cursor-pointer"
-          />
-
-          {files.length > 0 && (
-            <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {files.map((f, index) => (
-                <div key={index} className="bg-white shadow rounded-lg p-2 border">
-                  <img
-                    src={URL.createObjectURL(f)}
-                    alt="preview"
-                    className="rounded-lg h-24 w-full object-cover"
-                  />
-                  <p className="text-xs text-gray-600 mt-1 text-center">
-                    {(f.size / 1024 / 1024).toFixed(2)} MB
-                  </p>
-                </div>
-              ))}
+            <div className="p-6 bg-white rounded-2xl shadow-lg border mb-8">
+              <h2 className="font-bold text-2xl text-indigo-600 mb-4">How It Works</h2>
+              <ul className="list-decimal ml-6 text-gray-700 text-lg leading-relaxed space-y-2">
+                <li><b>Drag & drop or upload</b> your JPG, PNG, or WebP images.</li>
+                <li>Adjust the <b>quality slider</b> to balance size and quality (80% is recommended).</li>
+                <li>Click <b>Compress Images</b> to start the process.</li>
+                <li>Download a <b>ZIP file</b> with your compressed images.</li>
+              </ul>
             </div>
-          )}
-        </div>
 
-        {error && (
-          <p className="text-red-600 mt-3 font-medium">{error}</p>
-        )}
+            <div
+              className={`border-4 border-dashed rounded-2xl p-8 sm:p-12 text-center transition-all duration-300 ${
+                dragActive ? "border-indigo-600 bg-indigo-50" : "border-gray-300 bg-white"
+              }`}
+              onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
+              onDragLeave={() => setDragActive(false)}
+              onDrop={handleDrop}
+            >
+              <CloudArrowUpIcon className="w-20 h-20 text-indigo-500 mx-auto mb-4" />
+              
+              <label className="text-2xl font-semibold text-gray-700 cursor-pointer">
+                Drag & Drop Images Here
+                <input
+                  type="file"
+                  multiple
+                  accept="image/png, image/jpeg, image/webp"
+                  onChange={handleUpload}
+                  className="hidden"
+                />
+              </label>
+              <p className="text-gray-500 mt-2">or click to browse</p>
+            </div>
 
-        <div className="mt-6">
-          <label className="font-medium block mb-2">Quality: {quality}%</label>
-          <input
-            type="range"
-            min="10"
-            max="100"
-            value={quality}
-            onChange={(e) => setQuality(e.target.value)}
-            className="w-full accent-indigo-600"
-          />
-        </div>
+            {files.length > 0 && (
+              <div className="mt-8">
+                <h3 className="text-2xl font-bold text-gray-800 mb-4">Selected Images: {files.length}</h3>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                  {files.map((f, index) => (
+                    <div key={index} className="bg-white shadow-md rounded-lg p-2 border transition-transform transform hover:scale-105">
+                      <img
+                        src={URL.createObjectURL(f)}
+                        alt={`preview ${index}`}
+                        className="rounded-lg h-28 w-full object-cover"
+                      />
+                      <p className="text-xs text-gray-600 mt-2 text-center truncate">
+                        {(f.size / 1024 / 1024).toFixed(2)} MB
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
-        <button
-          onClick={uploadImages}
-          className="w-full mt-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg transition"
-        >
-          {loading ? "Compressing..." : "Compress Images"}
-        </button>
+            {error && <p className="text-red-600 mt-4 font-semibold text-center text-lg">{error}</p>}
 
-        {results && (
-          <div className="mt-8 text-center">
-           <button
-             onClick={runFinalAction(() => {
-               const a = document.createElement("a");
-               a.href = results;
-               a.download = "compressed-images.zip";
-               a.rel = "noopener";
-               document.body.appendChild(a);
-               a.click();
-               document.body.removeChild(a);
-             })}
-             className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg shadow"
-           >
-             Download Compressed ZIP
-           </button>
+            <div className="my-8 flex flex-col sm:flex-row items-center justify-center gap-6">
+              <div className="w-full sm:w-auto flex-grow flex items-center gap-4">
+                <label className="font-semibold text-lg">Quality: {quality}%</label>
+                <input
+                  type="range"
+                  min="10"
+                  max="100"
+                  value={quality}
+                  onChange={(e) => setQuality(e.target.value)}
+                  className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+                />
+              </div>
 
-          </div>
-        )}
+              <button
+                onClick={runFinalAction(uploadImages)}
+                disabled={loading || files.length === 0}
+                className="bg-indigo-600 disabled:opacity-50 text-white px-10 py-4 rounded-lg text-xl font-bold hover:bg-indigo-700 transition-all duration-300 ease-in-out transform hover:scale-105"
+              >
+                {loading ? "Compressing..." : "Compress Images"}
+              </button>
+            </div>
 
+            {results && (
+              <div className="mt-8 text-center">
+                <button
+                  onClick={runFinalAction(() => {
+                    const a = document.createElement("a");
+                    a.href = results;
+                    a.download = "compressed-images.zip";
+                    a.click();
+                  })}
+                  className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg text-xl font-bold shadow-lg transition-transform transform hover:scale-105"
+                >
+                  Download Compressed ZIP
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </ToolLayout>

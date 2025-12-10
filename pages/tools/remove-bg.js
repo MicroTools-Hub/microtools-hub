@@ -22,26 +22,81 @@ export default function RemoveBg(){
   return (<>
     <SEO title="Remove Background — MicroTools Hub" description="Remove image background quickly" />
     <ToolLayout>
-      <div className="max-w-3xl mx-auto p-4">
-      <h1 className="text-3xl font-bold text-indigo-600 mb-6">Remove Background</h1>
-      <input type="file" accept="image/*" onChange={(e)=>setFile(e.target.files[0])} />
-      <button onClick={submit} className="mt-3 bg-indigo-600 text-white px-4 py-2 rounded">Remove Background</button>
-      {out && (
-        <button
-          onClick={runFinalAction(() => {
-            const a = document.createElement("a");
-            a.href = out;
-            a.download = "no-bg.png";
-            a.rel = "noopener";
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-          })}
-          className="mt-3 block bg-green-600 text-white px-4 py-2 rounded"
-        >
-          Download
-        </button>
-      )}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-indigo-600 mb-8">Remove Image Background</h1>
+
+          <div className="p-6 bg-white rounded-2xl shadow-lg border mb-8 text-left">
+            <h2 className="font-bold text-2xl text-indigo-600 mb-4">How It Works</h2>
+            <ul className="list-decimal ml-6 text-gray-700 text-lg leading-relaxed space-y-2">
+              <li><b>Upload or drag & drop</b> an image file (JPG, PNG, etc.).</li>
+              <li>Click <b>Remove Background</b> to process the image.</li>
+              <li>Your background-free image will appear on the right.</li>
+              <li>Click <b>Download Image</b> to save the result as a PNG.</li>
+            </ul>
+          </div>
+
+          {!file && (
+            <div className="text-center">
+              <label className="inline-block bg-indigo-600 text-white px-8 py-4 rounded-lg text-xl font-bold cursor-pointer hover:bg-indigo-700 transition-all duration-300 ease-in-out transform hover:scale-105">
+                Choose an Image
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => setFile(e.target.files[0])}
+                  className="hidden"
+                />
+              </label>
+            </div>
+          )}
+
+          {file && (
+            <div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div className="bg-gray-100 p-4 rounded-2xl shadow-inner">
+                  <h3 className="text-2xl font-bold text-gray-700 mb-4">Original</h3>
+                  <img src={URL.createObjectURL(file)} alt="Original" className="max-w-full h-auto rounded-lg shadow-md mx-auto" />
+                </div>
+                <div className="bg-gray-100 p-4 rounded-2xl shadow-inner">
+                  <h3 className="text-2xl font-bold text-gray-700 mb-4">Result</h3>
+                  {loading ? (
+                    <div className="flex justify-center items-center h-64">
+                      <p className="text-indigo-600 font-semibold animate-pulse">Removing background...</p>
+                    </div>
+                  ) : out ? (
+                    <img src={out} alt="Background removed" className="max-w-full h-auto rounded-lg shadow-md mx-auto" />
+                  ) : (
+                    <div className="flex justify-center items-center h-64">
+                      <p className="text-gray-500">Awaiting processing...</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="mt-8">
+                <button
+                  onClick={runFinalAction(submit)}
+                  disabled={loading}
+                  className="bg-indigo-600 disabled:opacity-50 text-white px-10 py-4 rounded-lg text-xl font-bold hover:bg-indigo-700 transition-all duration-300 ease-in-out transform hover:scale-105"
+                >
+                  {loading ? 'Processing...' : 'Remove Background'}
+                </button>
+              </div>
+
+              {out && (
+                <div className="mt-6">
+                  <a
+                    href={out}
+                    download="background-removed.png"
+                    className="inline-block bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg text-xl font-bold shadow-lg transition-transform transform hover:scale-105"
+                  >
+                    Download Image
+                  </a>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </ToolLayout>
   </>);

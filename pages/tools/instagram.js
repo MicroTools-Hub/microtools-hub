@@ -33,28 +33,41 @@ export default function InstagramDownloader() {
     <>
       <SEO title="Instagram Downloader — MicroTools Hub" description="Download Instagram photos & videos" />
       <ToolLayout>
-        <div className="min-h-screen bg-gray-50 pt-24 px-4 sm:px-6">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl font-bold text-indigo-600 mb-6 text-center sm:text-left">Instagram Downloader</h1>
-        <input value={url} onChange={(e)=>setUrl(e.target.value)} className="w-full p-3 border rounded mb-3" placeholder="Paste Instagram post / reel URL" />
-        <button onClick={fetchVideo} className="bg-indigo-600 text-white px-6 py-2 rounded">Fetch</button>
-        {loading && <p className="mt-3">Fetching...</p>}
-        {error && <p className="text-red-600 mt-3">{error}</p>}
-        {downloadLink && (
-          <button
-            onClick={runFinalAction(() => {
-              const a = document.createElement("a");
-              a.href = downloadLink;
-              a.rel = "noopener";
-              document.body.appendChild(a);
-              a.click();
-              document.body.removeChild(a);
-            })}
-            className="block mt-4 bg-green-600 text-white px-4 py-2 rounded"
-          >
-            Download
-          </button>
-        )}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-indigo-600 mb-8">Instagram Downloader</h1>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <input
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+                className="w-full p-4 border rounded-lg text-lg flex-grow focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="Paste Instagram post or reel URL"
+              />
+              <button
+                onClick={runFinalAction(fetchVideo)}
+                className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all duration-300 ease-in-out transform hover:scale-105"
+                disabled={loading}
+              >
+                {loading ? "Fetching..." : "Fetch"}
+              </button>
+            </div>
+
+            {error && <p className="mt-4 text-red-500 text-lg">{error}</p>}
+            
+            {downloadLink && (
+              <div className="mt-8">
+                <a
+                  href={downloadLink}
+                  download
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-green-500 hover:bg-green-600 text-white font-semibold px-10 py-4 rounded-lg text-xl shadow-lg transition-transform transform hover:scale-105"
+                >
+                  Download Media
+                </a>
+              </div>
+            )}
           </div>
         </div>
       </ToolLayout>

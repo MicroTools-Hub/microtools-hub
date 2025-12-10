@@ -52,37 +52,51 @@ export default function YouTubeDownloader() {
       />
 
       <ToolLayout>
-        <div className="min-h-screen bg-gray-50 pt-24 px-4 sm:px-6">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl font-bold text-indigo-600 mb-6 text-center sm:text-left">YouTube Video Downloader</h1>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-indigo-600 mb-8">
+              YouTube Video Downloader
+            </h1>
 
-            <div className="p-4 bg-white rounded-2xl shadow-sm border mb-6">
-              <h2 className="font-semibold text-lg mb-2">How to Use</h2>
-              <ul className="list-disc ml-5 text-gray-700 leading-7">
+            <div className="p-6 bg-white rounded-2xl shadow-lg border mb-8 text-left">
+              <h2 className="font-bold text-2xl text-indigo-600 mb-4">
+                How to Use
+              </h2>
+              <ul className="list-decimal ml-6 text-gray-700 text-lg leading-relaxed space-y-2">
                 <li>Open any YouTube video</li>
-                <li>Tap <strong>Share → Copy Link</strong></li>
-                <li>Paste the link below</li>
-                <li>Click <strong>Fetch Video</strong></li>
+                <li>
+                  Tap <strong>Share → Copy Link</strong>
+                </li>
+                <li>Paste the link into the box below</li>
+                <li>
+                  Click <strong>Fetch Video</strong>
+                </li>
                 <li>Select a quality (144p–1080p)</li>
                 <li>Download instantly as MP4</li>
               </ul>
             </div>
 
-            <input
-              className="w-full max-w-full p-3 border rounded-lg shadow-sm mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              placeholder="Paste YouTube video URL..."
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-            />
+            <div className="flex flex-col sm:flex-row gap-4">
+              <input
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+                placeholder="Paste YouTube video URL"
+                className="w-full p-4 border rounded-lg text-lg flex-grow focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+              <button
+                onClick={fetchVideo}
+                disabled={loading}
+                className="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all duration-300 ease-in-out transform hover:scale-105"
+              >
+                {loading ? "Fetching..." : "Fetch Video"}
+              </button>
+            </div>
 
-            <button
-              onClick={fetchVideo}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg w-full sm:w-auto text-center transition"
-            >
-              Fetch Video
-            </button>
-
-            {error && <p className="text-red-600 mt-4">{error}</p>}
+            {error && (
+              <p className="mt-4 text-red-500 text-lg font-semibold">
+                {error}
+              </p>
+            )}
 
             {loading && (
               <div className="mt-6 p-4 bg-white rounded-2xl shadow-sm border animate-pulse">
@@ -94,12 +108,16 @@ export default function YouTubeDownloader() {
             )}
 
             {info && !error && (
-              <div className="mt-6 p-4 bg-white rounded-2xl shadow-sm border">
-                <h2 className="text-xl font-semibold mb-3">{info.title}</h2>
+              <div className="mt-6 p-6 bg-white rounded-2xl shadow-lg border text-left">
+                <h2 className="text-2xl font-bold mb-4">{info.title}</h2>
 
-                <img src={info.thumbnail} className="w-64 rounded mb-4 shadow" alt="thumbnail" />
+                <img
+                  src={info.thumbnail}
+                  className="w-full max-w-sm mx-auto rounded-lg mb-6 shadow-md"
+                  alt="thumbnail"
+                />
 
-                <div className="space-y-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {resolutions.map((res) =>
                     info.links?.[res] ? (
                       <button
@@ -112,7 +130,7 @@ export default function YouTubeDownloader() {
                           a.click();
                           document.body.removeChild(a);
                         })}
-                        className="block bg-gray-100 py-3 rounded-lg text-center border hover:bg-gray-200 transition font-medium"
+                        className="w-full bg-gray-100 py-3 rounded-lg text-center border hover:bg-gray-200 transition font-medium text-lg"
                       >
                         Download {res}
                       </button>
@@ -127,12 +145,3 @@ export default function YouTubeDownloader() {
     </>
   );
 }
-
-
-
-
-
-
-
-
-

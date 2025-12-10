@@ -149,116 +149,115 @@ export default function FileCompressor() {
 
       {/* UI (UNCHANGED) */}
       <ToolLayout>
-        <div className="min-h-screen bg-gray-50 pt-24 px-4 sm:px-6">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl font-bold text-indigo-600 mb-6 text-center sm:text-left">File Compressor</h1>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-indigo-600 mb-8 text-center">Online File Compressor</h1>
 
-        <div className="p-4 bg-white rounded-2xl shadow-sm border mb-6">
-          <h2 className="font-semibold text-lg mb-2">How to Use</h2>
-          <ul className="list-disc ml-5 text-gray-700 leading-7">
-            <li>Upload any file — PDF, DOCX, PPTX, XLSX, MP4, ZIP, JPG, PNG, etc.</li>
-            <li>Select compression level: Low, Medium, High</li>
-            <li>Click <b>Compress</b> to reduce file size</li>
-            <li>Download your compressed ZIP file instantly</li>
-            <li>Fully works on Android, iPhone, Windows, and Mac</li>
-          </ul>
-        </div>
+            <div className="p-6 bg-white rounded-2xl shadow-lg border mb-8">
+              <h2 className="font-bold text-2xl text-indigo-600 mb-4">How It Works</h2>
+              <ul className="list-decimal ml-6 text-gray-700 text-lg leading-relaxed space-y-2">
+                <li><b>Upload any file</b> — PDF, DOCX, MP4, ZIP, JPG, PNG, etc.</li>
+                <li>Select a compression level (Low, Medium, or High).</li>
+                <li>Click <b>Compress File</b> to start processing.</li>
+                <li>Download your compressed ZIP file instantly.</li>
+              </ul>
+            </div>
 
-        <div
-          ref={dropRef}
-          onDragEnter={handleDrag}
-          onDragOver={handleDrag}
-          onDragLeave={handleLeave}
-          onDrop={handleDrop}
-          className="border-2 border-dashed rounded-xl p-10 text-center text-gray-500 transition bg-white"
-        >
-          {file ? (
-            <p className="text-lg text-gray-800">
-              <b>Selected File:</b> {file.name} (
-              {(file.size / 1024 / 1024).toFixed(2)} MB)
-            </p>
-          ) : (
-            <p className="text-lg">Drag & Drop your file here or click below</p>
-          )}
-        </div>
-
-        <input
-          type="file"
-          onChange={(e) => handleFile(e.target.files[0])}
-          className="mt-4 mb-4"
-        />
-
-        <div className="mb-4">
-          <label className="font-medium">Compression Level: </label>
-          <select
-            value={level}
-            onChange={(e) => setLevel(e.target.value)}
-            className="border p-2 rounded ml-2"
-          >
-            <option value="low">Low (Best Quality, Least Compression)</option>
-            <option value="medium">Medium (Balanced)</option>
-            <option value="high">High (Max Compression)</option>
-          </select>
-        </div>
-
-        <button
-          onClick={uploadFile}
-          disabled={loading}
-          className="bg-indigo-600 disabled:opacity-60 text-white px-8 py-3 rounded-lg hover:bg-indigo-700 transition"
-        >
-          {loading ? "Compressing..." : "Compress File"}
-        </button>
-
-        {downloadUrl && (
-          <div className="mt-8 text-center">
-            <button
-              onClick={runFinalAction(() => {
-                  const a = document.createElement("a");
-                  a.href = downloadUrl;
-                  a.download = "compressed.zip";
-                  a.rel = "noopener";
-                  document.body.appendChild(a);
-                  a.click();
-                  document.body.removeChild(a);
-                })}
-              className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg shadow"
+            <div
+              ref={dropRef}
+              onDragEnter={handleDrag}
+              onDragOver={handleDrag}
+              onDragLeave={handleLeave}
+              onDrop={handleDrop}
+              className="border-4 border-dashed border-gray-300 rounded-2xl p-8 sm:p-12 text-center transition-all duration-300 bg-white hover:border-indigo-500 hover:bg-indigo-50"
             >
-              Download Compressed ZIP
-            </button>
-          </div>
-        )}
+              {file ? (
+                <div className="text-lg text-gray-800">
+                  <p className="font-bold text-2xl mb-2">Selected File:</p>
+                  <p>{file.name}</p>
+                  <p className="text-gray-600 text-base mt-1">({(file.size / 1024 / 1024).toFixed(2)} MB)</p>
+                </div>
+              ) : (
+                <div>
+                  <p className="text-2xl font-semibold text-gray-600">Drag & Drop your file here</p>
+                  <p className="text-gray-500 mt-2">or</p>
+                  <label className="mt-4 inline-block bg-indigo-100 text-indigo-700 px-6 py-3 rounded-lg font-semibold cursor-pointer hover:bg-indigo-200 transition">
+                    Click to Upload
+                    <input
+                      type="file"
+                      onChange={(e) => handleFile(e.target.files[0])}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+              )}
+            </div>
+            
+            <div className="my-6 flex flex-col sm:flex-row items-center justify-center gap-6">
+              <div className="flex items-center gap-3">
+                <label className="font-semibold text-lg">Compression Level:</label>
+                <select
+                  value={level}
+                  onChange={(e) => setLevel(e.target.value)}
+                  className="border border-gray-300 p-3 rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </div>
 
-        <section className="mt-12 p-4 bg-white border rounded-xl shadow">
-          <h2 className="text-2xl font-bold text-indigo-600 mb-4">
-            Frequently Asked Questions
-          </h2>
-
-          <div className="space-y-4 text-gray-700 leading-7">
-            <div>
-              <h3 className="font-semibold">Which file types are supported?</h3>
-              <p>DOCX, PPTX, XLSX, PDF, MP4, JPG, PNG, ZIP, TXT, and many more.</p>
+              <button
+                onClick={runFinalAction(uploadFile)}
+                disabled={loading || !file}
+                className="bg-indigo-600 disabled:opacity-50 text-white px-10 py-4 rounded-lg text-xl font-bold hover:bg-indigo-700 transition-all duration-300 ease-in-out transform hover:scale-105"
+              >
+                {loading ? "Compressing..." : "Compress File"}
+              </button>
             </div>
 
-            <div>
-              <h3 className="font-semibold">What does compression do?</h3>
-              <p>
-                It reduces file size by optimizing content while keeping quality high.
-              </p>
-            </div>
+            {loading && progress > 0 && (
+              <div className="w-full bg-gray-200 rounded-full h-4 my-4">
+                <div className="bg-indigo-600 h-4 rounded-full" style={{ width: `${progress}%` }}></div>
+              </div>
+            )}
 
-            <div>
-              <h3 className="font-semibold">Is it safe?</h3>
-              <p>Yes, all files are temporary and auto-deleted.</p>
-            </div>
+            {downloadUrl && (
+              <div className="mt-8 text-center">
+                <button
+                  onClick={runFinalAction(() => {
+                    const a = document.createElement("a");
+                    a.href = downloadUrl;
+                    a.download = "compressed.zip";
+                    a.click();
+                  })}
+                  className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg text-xl font-bold shadow-lg transition-transform transform hover:scale-105"
+                >
+                  Download Compressed ZIP
+                </button>
+              </div>
+            )}
 
-            <div>
-              <h3 className="font-semibold">Does it reduce video quality?</h3>
-              <p>
-                High compression reduces size aggressively and may slightly reduce MP4 quality.
-              </p>
-            </div>
-          </div>
-        </section>
+            <section className="mt-16 p-6 bg-white border rounded-2xl shadow-lg">
+              <h2 className="text-3xl font-bold text-indigo-600 mb-6">
+                Frequently Asked Questions
+              </h2>
+
+              <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
+                <div>
+                  <h3 className="font-bold text-xl">Which file types are supported?</h3>
+                  <p>You can compress almost any file, including DOCX, PPTX, XLSX, PDF, MP4, MOV, JPG, PNG, and ZIP archives.</p>
+                </div>
+                <div>
+                  <h3 className="font-bold text-xl">Is it safe to use?</h3>
+                  <p>Absolutely. Your files are uploaded over a secure connection and are automatically deleted from our servers after a short period.</p>
+                </div>
+                <div>
+                  <h3 className="font-bold text-xl">Does compression affect quality?</h3>
+                  <p>The "High" compression setting may slightly reduce quality for some files like videos (MP4) and images (JPG), while "Low" and "Medium" settings provide excellent quality.</p>
+                </div>
+              </div>
+            </section>
           </div>
         </div>
       </ToolLayout>

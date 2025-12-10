@@ -74,72 +74,61 @@ export default function Summarizer() {
       />
 
       <ToolLayout>
-        <div className="min-h-screen bg-gray-50 pt-24 px-4 sm:px-6">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="max-w-3xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl font-bold text-indigo-600 mb-6 text-center sm:text-left">Smart Text Summarizer</h1>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-indigo-600 mb-8 text-center">Smart Text Summarizer</h1>
 
-            {/* Instructions */}
-            <div className="p-4 bg-white rounded-2xl shadow-sm border mb-6">
-              <h2 className="font-semibold text-lg mb-2">How to Use</h2>
-              <ul className="list-disc ml-6 text-gray-700 space-y-1">
-                <li>Paste your paragraph, essay, or article below.</li>
-                <li>Select how many sentences you want in the summary.</li>
-                <li>Click <strong>Summarize</strong> to generate a clean summary.</li>
-                <li>Everything works offline in your browser.</li>
+            <div className="p-6 bg-white rounded-2xl shadow-lg border mb-8">
+              <h2 className="font-bold text-2xl text-indigo-600 mb-4">How It Works</h2>
+              <ul className="list-decimal ml-6 text-gray-700 text-lg leading-relaxed space-y-2">
+                <li>Paste your text (article, essay, paragraph) into the input box.</li>
+                <li>Choose the desired number of sentences for your summary.</li>
+                <li>Click <b>Summarize Text</b> to generate the result.</li>
+                <li>Your summary appears below — it's that easy!</li>
               </ul>
             </div>
 
-            {/* Input */}
             <textarea
-              className="w-full max-w-full p-3 border rounded-lg min-h-[120px] focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              placeholder="Paste text here..."
+              className="w-full p-4 border rounded-lg text-lg min-h-[200px] focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="Paste your text here to summarize..."
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
             />
 
-            {/* Options */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 my-4">
+            <div className="my-6 flex flex-col sm:flex-row items-center justify-center gap-6">
               <div className="flex items-center gap-3">
-                <span className="font-medium">Sentences:</span>
+                <label className="font-semibold text-lg">Summary Sentences:</label>
                 <input
                   type="number"
                   min="1"
-                  max="10"
+                  max="20"
                   value={sentencesCount}
                   onChange={(e) => setSentencesCount(Number(e.target.value))}
-                  className="border p-2 w-20 rounded"
+                  className="border p-3 w-24 rounded-lg text-lg text-center focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
 
               <button
                 onClick={runFinalAction(summarize)}
-                className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg w-full sm:w-auto text-center transition"
+                className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-10 py-4 rounded-lg text-xl transition-all duration-300 ease-in-out transform hover:scale-105"
               >
-                Summarize
+                Summarize Text
               </button>
             </div>
 
-            {/* Output */}
             {summary && (
-              <div className="mt-6 bg-white rounded-2xl shadow-sm border p-4 sm:p-6">
-                <h2 className="text-xl font-semibold mb-2">Summary</h2>
-                <p className="leading-7 text-gray-800">{summary}</p>
+              <div className="mt-8 bg-white rounded-2xl shadow-2xl border p-6">
+                <h2 className="text-3xl font-bold mb-4 text-gray-800">Your Summary</h2>
+                <p className="text-lg leading-relaxed text-gray-700">{summary}</p>
               </div>
             )}
-
-            {/* SEO Section */}
-            <section className="mt-6">
-              <h2 className="text-2xl font-bold text-indigo-600 mb-4">
-                Free Online Text Summarizer — Reduce Any Content Instantly
+            
+            <section className="mt-12 p-6 bg-white rounded-2xl shadow-lg border">
+              <h2 className="text-3xl font-bold text-indigo-600 mb-4">
+                Free Online Summarizer
               </h2>
-              <p className="text-gray-700 leading-7 mb-4">
-                Our Smart Summarizer extracts the most important sentences using a
-                frequency-based scoring system. It's perfect for students, researchers,
-                and writers who want fast and accurate summaries.
-              </p>
-
-              <p className="text-gray-700 leading-7">
-                No login, no backend — everything runs privately in your browser.
+              <p className="text-lg text-gray-700 leading-relaxed">
+                This tool helps you quickly summarize long texts, articles, and documents. It works by identifying the most important sentences based on word frequency, giving you a concise overview of the content. All processing happens in your browser, ensuring your data remains private.
               </p>
             </section>
           </div>

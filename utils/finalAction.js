@@ -18,7 +18,7 @@ export function runFinalAction(fn, { adUrl = "/ad.html", adHtml = null, closeAft
       try {
         // We call showAd with url but prevent close until after action.
         // showAd will open the window and navigate it.
-        adOpened = await showAd({ url: adUrl, html: adHtml, closeAfterMs });
+        adOpened = await showAd();
       } catch (e) {
         adOpened = false;
       }
@@ -34,7 +34,7 @@ export function runFinalAction(fn, { adUrl = "/ad.html", adHtml = null, closeAft
     // If ad could not be opened previously, try a fallback (attempt again)
     if (!adOpened) {
       try {
-        await showAd({ url: adUrl, html: adHtml, closeAfterMs });
+        await showAd();
       } catch (e) {
         // ignore
       }

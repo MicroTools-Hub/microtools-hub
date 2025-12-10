@@ -129,139 +129,100 @@ export default function PasswordGenerator() {
       />
 
       <ToolLayout>
-        <div className="min-h-screen bg-gray-50 pt-24 px-4 sm:px-6">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl font-bold text-indigo-600 mb-6 text-center sm:text-left">Password Generator</h1>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="max-w-2xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-indigo-600 mb-8 text-center">Secure Password Generator</h1>
 
-        {/* Card */}
-        <div className="p-6 bg-white/80 backdrop-blur rounded-xl shadow-lg space-y-6 border">
-
-          {/* Display */}
-          <div className="relative">
-            <input
-              type={showPassword ? "text" : "password"}
-              value={password}
-              readOnly
-              className="w-full p-3 border rounded-lg font-mono text-lg pr-14"
-              placeholder="Generated password..."
-            />
-
-            {/* Toggle visibility */}
-            <button
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-2.5"
-            >
-              {showPassword ? (
-                <EyeSlashIcon className="w-6 h-6 text-gray-600" />
-              ) : (
-                <EyeIcon className="w-6 h-6 text-gray-600" />
-              )}
-            </button>
-          </div>
-
-          {/* Copy */}
-          {password && (
-            <button
-              onClick={runFinalAction(copyPassword)}
-              className={`w-full py-2 rounded-lg font-semibold text-white transition ${
-                copied ? "bg-green-600" : "bg-gray-900 hover:bg-black"
-              }`}
-            >
-              {copied ? "Copied!" : "Copy Password"}
-            </button>
-          )}
-
-          {/* Strength meter */}
-          {password && (
-            <div>
-              <p className="font-semibold mb-1">Strength: {strength.label}</p>
-              <div className="w-full bg-gray-200 rounded h-3 overflow-hidden">
-                <div
-                  className={`${strength.color} h-3 transition-all`}
-                  style={{ width: strength.width }}
-                ></div>
+            <div className="p-6 sm:p-8 bg-white rounded-2xl shadow-2xl border space-y-8">
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  readOnly
+                  className="w-full p-4 border-2 border-gray-200 bg-gray-50 rounded-lg font-mono text-2xl pr-16 text-center"
+                  placeholder="Your new password"
+                />
+                <button
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-indigo-600"
+                >
+                  {showPassword ? <EyeSlashIcon className="w-7 h-7" /> : <EyeIcon className="w-7 h-7" />}
+                </button>
               </div>
+
+              {password && (
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4">
+                    <div className="w-full bg-gray-200 rounded-full h-3">
+                      <div
+                        className={`${strength.color} h-3 rounded-full transition-all duration-300`}
+                        style={{ width: strength.width }}
+                      ></div>
+                    </div>
+                    <span className={`font-semibold text-lg ${strength.color.replace('bg-', 'text-')}`}>{strength.label}</span>
+                  </div>
+
+                  <button
+                    onClick={runFinalAction(copyPassword)}
+                    className={`w-full py-3 rounded-lg font-semibold text-lg text-white transition-all duration-300 ${
+                      copied ? "bg-green-600" : "bg-gray-800 hover:bg-black"
+                    }`}
+                  >
+                    {copied ? "Copied!" : "Copy Password"}
+                  </button>
+                </div>
+              )}
+
+              <div className="space-y-6">
+                <div>
+                  <label className="font-semibold text-lg">Password Length: {length}</label>
+                  <input
+                    type="range"
+                    min="4"
+                    max="64"
+                    value={length}
+                    onChange={(e) => setLength(parseInt(e.target.value))}
+                    className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-600 mt-2"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-lg">
+                  {[
+                    { label: 'Lowercase (a-z)', state: includeLowercase, setter: setIncludeLowercase },
+                    { label: 'Uppercase (A-Z)', state: includeUppercase, setter: setIncludeUppercase },
+                    { label: 'Numbers (0-9)', state: includeNumbers, setter: setIncludeNumbers },
+                    { label: 'Symbols (!@#$)', state: includeSymbols, setter: setIncludeSymbols },
+                  ].map(opt => (
+                    <label key={opt.label} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border cursor-pointer hover:bg-indigo-50">
+                      <input
+                        type="checkbox"
+                        checked={opt.state}
+                        onChange={(e) => opt.setter(e.target.checked)}
+                        className="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500"
+                      />
+                      <span className="font-medium">{opt.label}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <button
+                onClick={runFinalAction(generatePassword)}
+                className="w-full py-4 bg-indigo-600 text-white hover:bg-indigo-700 rounded-lg text-xl font-bold transition-all duration-300 ease-in-out transform hover:scale-105"
+              >
+                Generate Password
+              </button>
             </div>
-          )}
 
-          {/* Settings */}
-          <div className="space-y-4">
-
-            {/* Length */}
-            <div>
-              <label className="font-semibold">Length: {length}</label>
-              <input
-                type="range"
-                min="4"
-                max="64"
-                value={length}
-                onChange={(e) => setLength(parseInt(e.target.value))}
-                className="w-full accent-indigo-600"
-              />
+            <div className="mt-12 p-6 bg-white rounded-2xl shadow-lg border">
+              <h2 className="font-bold text-2xl text-indigo-600 mb-4">How to Create a Strong Password</h2>
+              <ul className="list-decimal ml-6 text-gray-700 text-lg leading-relaxed space-y-2">
+                <li>Use a long password (16+ characters is recommended).</li>
+                <li>Include a mix of uppercase letters, lowercase letters, numbers, and symbols.</li>
+                <li>Avoid using personal information like birthdays or names.</li>
+                <li>Never reuse passwords across different websites.</li>
+              </ul>
             </div>
-
-            {/* Checkboxes */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <label className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  checked={includeLowercase}
-                  onChange={(e) => setIncludeLowercase(e.target.checked)}
-                />
-                Include Lowercase (a-z)
-              </label>
-
-              <label className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  checked={includeUppercase}
-                  onChange={(e) => setIncludeUppercase(e.target.checked)}
-                />
-                Include Uppercase (A-Z)
-              </label>
-
-              <label className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  checked={includeNumbers}
-                  onChange={(e) => setIncludeNumbers(e.target.checked)}
-                />
-                Include Numbers (0–9)
-              </label>
-
-              <label className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  checked={includeSymbols}
-                  onChange={(e) => setIncludeSymbols(e.target.checked)}
-                />
-                Include Symbols (!@#$)
-              </label>
-            </div>
-          </div>
-
-          {/* Generate Button */}
-          <button
-              onClick={runFinalAction(generatePassword)}
-            className="w-full py-3 bg-indigo-600 text-white hover:bg-indigo-700 rounded-lg text-lg font-semibold"
-          >
-            Generate Password
-          </button>
-          </div>
-
-        {/* Instructions */}
-        <section className="mt-12">
-          <h2 className="text-2xl font-bold text-indigo-600 mb-3">
-            How to Use This Password Generator
-          </h2>
-
-          <ul className="list-disc ml-5 text-gray-700 leading-7">
-            <li>Select your preferred password length (recommended: 12–20).</li>
-            <li>Choose character types (uppercase, lowercase, symbols, numbers).</li>
-            <li>Click <strong>Generate Password</strong>.</li>
-            <li>Copy & use it anywhere securely.</li>
-          </ul>
-        </section>
           </div>
         </div>
       </ToolLayout>

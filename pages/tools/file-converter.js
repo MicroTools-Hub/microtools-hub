@@ -133,92 +133,89 @@ export default function FileConverter() {
 
       {/* UI SECTION (UNCHANGED) */}
       <ToolLayout>
-        <div className="min-h-screen bg-gray-50 pt-24 px-4 sm:px-6">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl font-bold text-indigo-600 mb-6 text-center sm:text-left">Universal File Converter</h1>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-indigo-600 mb-8 text-center">Universal File Converter</h1>
 
-        <div className="p-5 bg-white shadow rounded-xl border mb-8">
-          <h2 className="font-semibold text-lg mb-2">How to Use</h2>
-          <ul className="list-disc ml-6 text-gray-700 leading-7">
-            <li>Upload or drag & drop any file (PDF, DOCX, MP4, JPG, etc.)</li>
-            <li>Select the format you want to convert to</li>
-            <li>Click <strong>Convert</strong></li>
-            <li>Download your converted file instantly</li>
-          </ul>
-        </div>
+            <div className="p-6 bg-white rounded-2xl shadow-lg border mb-8">
+              <h2 className="font-bold text-2xl text-indigo-600 mb-4">How It Works</h2>
+              <ul className="list-decimal ml-6 text-gray-700 text-lg leading-relaxed space-y-2">
+                <li><b>Upload or drag & drop a file</b> (e.g., PDF, DOCX, MP4, JPG).</li>
+                <li>Select the target format you want to convert to (e.g., PDF, PNG, MP3).</li>
+                <li>Click <b>Convert File</b> to begin the conversion.</li>
+                <li>Download your newly converted file instantly.</li>
+              </ul>
+            </div>
 
-        <div
-          onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
-          onDragLeave={() => setDragActive(false)}
-          onDrop={handleDrop}
-          className={`border-2 rounded-xl p-10 text-center transition ${
-            dragActive
-              ? "border-indigo-500 bg-indigo-50"
-              : "border-gray-300 bg-gray-50"
-          }`}
-        >
-          <CloudArrowUpIcon className="w-16 h-16 text-indigo-600 mx-auto mb-3" />
+            <div
+              onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
+              onDragLeave={() => setDragActive(false)}
+              onDrop={handleDrop}
+              className={`border-4 border-dashed rounded-2xl p-8 sm:p-12 text-center transition-all duration-300 ${
+                dragActive ? "border-indigo-600 bg-indigo-50" : "border-gray-300 bg-white"
+              }`}
+            >
+              <CloudArrowUpIcon className="w-20 h-20 text-indigo-500 mx-auto mb-4" />
+              
+              {!file && (
+                <div>
+                  <p className="text-2xl font-semibold text-gray-700">Drag & Drop File Here</p>
+                  <p className="text-gray-500 mt-2">or</p>
+                  <label className="mt-4 inline-block bg-indigo-100 text-indigo-700 px-6 py-3 rounded-lg font-semibold cursor-pointer hover:bg-indigo-200 transition">
+                    Choose a File
+                    <input type="file" onChange={(e) => setFile(e.target.files[0])} className="hidden" />
+                  </label>
+                </div>
+              )}
 
-          <p className="text-gray-700 font-medium">Drag & Drop your file here</p>
-          <p className="text-gray-500 text-sm mb-4">or click to browse</p>
+              {file && (
+                <div className="text-lg text-gray-800">
+                  <p className="font-bold text-xl">Selected:</p>
+                  <p>{file.name} ({(file.size / 1024 / 1024).toFixed(2)} MB)</p>
+                </div>
+              )}
+            </div>
 
-          <input
-            type="file"
-            onChange={(e) => setFile(e.target.files[0])}
-            className="w-full cursor-pointer"
-          />
+            {error && <p className="text-red-600 mt-4 font-semibold text-center text-lg">{error}</p>}
 
-          {file && (
-            <p className="mt-3 text-gray-700 text-sm">
-              <strong>Selected:</strong> {file.name} ({(file.size / 1024 / 1024).toFixed(2)} MB)
-            </p>
-          )}
-        </div>
+            <div className="my-8 flex flex-col sm:flex-row items-center justify-center gap-6">
+              <div className="flex items-center gap-3">
+                <label className="font-semibold text-lg">Convert to:</label>
+                <select
+                  value={targetType}
+                  onChange={(e) => setTargetType(e.target.value)}
+                  className="border border-gray-300 p-3 rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  {outputTypes.map((type) => (
+                    <option key={type} value={type}>{type.toUpperCase()}</option>
+                  ))}
+                </select>
+              </div>
 
-        {error && (
-          <p className="text-red-600 mt-3 font-medium">{error}</p>
-        )}
+              <button
+                onClick={runFinalAction(convertFile)}
+                disabled={loading || !file}
+                className="bg-indigo-600 disabled:opacity-50 text-white px-10 py-4 rounded-lg text-xl font-bold hover:bg-indigo-700 transition-all duration-300 ease-in-out transform hover:scale-105"
+              >
+                {loading ? "Converting..." : "Convert File"}
+              </button>
+            </div>
 
-        <div className="mt-6">
-          <label className="font-medium mr-2">Convert to:</label>
-          <select
-            value={targetType}
-            onChange={(e) => setTargetType(e.target.value)}
-            className="border p-2 rounded"
-          >
-            {outputTypes.map((type) => (
-              <option key={type} value={type}>{type.toUpperCase()}</option>
-            ))}
-          </select>
-        </div>
-
-        <button
-          onClick={convertFile}
-          disabled={loading}
-          className="w-full mt-6 py-3 bg-indigo-600 disabled:opacity-60 hover:bg-indigo-700 text-white font-semibold rounded-lg transition"
-        >
-          {loading ? "Converting..." : "Convert File"}
-        </button>
-
-        {downloadUrl && (
-          <div className="mt-8 text-center">
-           <button
-             onClick={runFinalAction(() => {
-               const a = document.createElement("a");
-               a.href = downloadUrl;
-               a.download = (file?.name || "file") + ".zip";
-               a.rel = "noopener";
-               document.body.appendChild(a);
-               a.click();
-               document.body.removeChild(a);
-             })}
-             className="block w-full sm:w-auto text-center bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-lg mt-3"
-           >
-             Download Compressed File (ZIP)
-           </button>
-
-          </div>
-        )}
+            {downloadUrl && (
+              <div className="mt-8 text-center">
+                <button
+                  onClick={runFinalAction(() => {
+                    const a = document.createElement("a");
+                    a.href = downloadUrl;
+                    a.download = `${file.name.split('.').slice(0, -1).join('.')}.${targetType}`;
+                    a.click();
+                  })}
+                  className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg text-xl font-bold shadow-lg transition-transform transform hover:scale-105"
+                >
+                  Download Converted File
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </ToolLayout>

@@ -213,44 +213,58 @@ export default function QuoteGenerator() {
       />
 
       <ToolLayout>
-        <div className="min-h-screen bg-gray-50 pt-24 px-4 sm:px-6">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl font-bold text-indigo-600 mb-6 text-center sm:text-left">Random Quote Generator</h1>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-indigo-600 mb-8">Random Quote Generator</h1>
 
-        <div className="flex gap-4 mb-6">
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="border p-3 rounded-lg w-1/2"
-          >
-            {Object.keys(QUOTES).map((key) => (
-              <option key={key} value={key}>
-                {key.charAt(0).toUpperCase() + key.slice(1)}
-              </option>
-            ))}
-          </select>
+            <div className="p-6 bg-white rounded-2xl shadow-lg border mb-8">
+              <h2 className="font-bold text-2xl text-indigo-600 mb-4">How It Works</h2>
+              <ul className="list-decimal ml-6 text-gray-700 text-lg leading-relaxed space-y-2">
+                <li>Select a category from the dropdown menu.</li>
+                <li>Click <b>Generate Quote</b> to get a random quote.</li>
+                <li>Your quote will appear in a stylish card.</li>
+                <li>Click <b>Copy Quote</b> to save it to your clipboard.</li>
+              </ul>
+            </div>
 
-          <button
-            onClick={runFinalAction(generateQuote)}
-            className="bg-indigo-600 w-1/2 text-white px-6 py-2 rounded-lg hover:bg-indigo-700"
-          >
-            Generate
-          </button>
-        </div>
+            <div className="flex flex-col sm:flex-row gap-4 mb-8">
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="w-full sm:w-1/2 p-4 border rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              >
+                {Object.keys(QUOTES).map((key) => (
+                  <option key={key} value={key}>
+                    {key.charAt(0).toUpperCase() + key.slice(1)}
+                  </option>
+                ))}
+              </select>
 
-        {quote && (
-          <div className="p-6 bg-white shadow rounded-xl border relative">
-            <p className="text-xl italic mb-4 leading-relaxed">{quote}</p>
+              <button
+                onClick={runFinalAction(generateQuote)}
+                className="w-full sm:w-1/2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all duration-300 ease-in-out transform hover:scale-105"
+              >
+                Generate Quote
+              </button>
+            </div>
 
-            <button
-              onClick={copyQuote}
-              className="bg-gray-900 text-white px-4 py-2 rounded hover:bg-black"
-            >
-              {copied ? "Copied!" : "Copy Quote"}
-            </button>
-
-          </div>
-        )}
+            {quote && (
+              <div className="p-8 bg-white shadow-2xl rounded-2xl border relative text-left">
+                <p className="text-2xl md:text-3xl font-serif italic mb-6 leading-relaxed text-gray-800">"{quote}"</p>
+                <div className="text-right">
+                  <button
+                    onClick={copyQuote}
+                    className={`font-semibold py-2 px-6 rounded-lg transition-all duration-300 ${
+                      copied
+                        ? "bg-green-500 text-white"
+                        : "bg-gray-800 hover:bg-black text-white"
+                    }`}
+                  >
+                    {copied ? "Copied!" : "Copy Quote"}
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </ToolLayout>

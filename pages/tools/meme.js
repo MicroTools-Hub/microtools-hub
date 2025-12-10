@@ -175,99 +175,85 @@ export default function MemeGenerator() {
 
       {/* UI (unchanged) */}
       <ToolLayout>
-        <div className="min-h-screen bg-gray-50 pt-24 px-4 sm:px-6">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl font-bold text-indigo-600 mb-6 text-center sm:text-left">Meme Caption Generator</h1>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-indigo-600 mb-8 text-center">Meme Generator</h1>
 
-        {/* How to Use */}
-        <div className="p-5 bg-white border rounded-xl shadow mb-8">
-          <h2 className="font-semibold text-lg mb-2">How to Use</h2>
-          <ul className="list-disc ml-6 text-gray-700 leading-7">
-            <li>Upload an image or drag & drop into the box.</li>
-            <li>Type your top and bottom text.</li>
-            <li>Adjust font size for perfect fit.</li>
-            <li>Click <strong>Download Meme</strong>.</li>
-          </ul>
-        </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-6">
+                <div
+                  className={`relative border-4 border-dashed rounded-2xl p-8 text-center transition-all duration-300 ${
+                    dragActive ? "border-indigo-600 bg-indigo-50" : "border-gray-300 bg-white"
+                  }`}
+                  onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
+                  onDragLeave={() => setDragActive(false)}
+                  onDrop={handleDrop}
+                >
+                  <CloudArrowUpIcon className="w-16 h-16 text-indigo-500 mx-auto mb-4" />
+                  <label className="text-xl font-semibold text-gray-700 cursor-pointer">
+                    Drag & Drop or Click to Upload
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => handleImageUpload(e.target.files[0])}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
 
-        {/* Upload Box */}
-        <div
-          className={`p-10 rounded-xl border-2 mb-6 text-center transition ${
-            dragActive ? "bg-indigo-50 border-indigo-500" : "bg-gray-50 border-gray-300"
-          }`}
-          onDragOver={(e) => {
-            e.preventDefault();
-            setDragActive(true);
-          }}
-          onDragLeave={() => setDragActive(false)}
-          onDrop={handleDrop}
-        >
-          <CloudArrowUpIcon className="w-16 h-16 text-indigo-600 mx-auto mb-3" />
-          <p className="font-medium text-gray-700">Drag & drop image here</p>
-          <p className="text-gray-500 text-sm mb-4">or click below</p>
+                <input
+                  className="w-full p-4 border rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  placeholder="Top Text"
+                  value={topText}
+                  onChange={(e) => {
+                    setTopText(e.target.value);
+                    drawMeme(image, e.target.value, bottomText, fontSize);
+                  }}
+                />
+                
+                <input
+                  className="w-full p-4 border rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  placeholder="Bottom Text"
+                  value={bottomText}
+                  onChange={(e) => {
+                    setBottomText(e.target.value);
+                    drawMeme(image, topText, e.target.value, fontSize);
+                  }}
+                />
 
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => handleImageUpload(e.target.files[0])}
-            className="cursor-pointer"
-          />
-        </div>
+                <div className="space-y-2">
+                  <label className="font-semibold text-lg">Font Size: {fontSize}px</label>
+                  <input
+                    type="range"
+                    min="10"
+                    max="120"
+                    value={fontSize}
+                    onChange={(e) => {
+                      const newSize = parseInt(e.target.value);
+                      setFontSize(newSize);
+                      drawMeme(image, topText, bottomText, newSize);
+                    }}
+                    className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+                  />
+                </div>
+                
+                {image && (
+                  <button
+                    onClick={runFinalAction(downloadMeme)}
+                    className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-4 rounded-lg text-xl font-bold transition-all duration-300 ease-in-out transform hover:scale-105"
+                  >
+                    Download Meme
+                  </button>
+                )}
+              </div>
 
-        {/* Text Inputs */}
-        <div className="mb-6 space-y-4">
-          <input
-            className="w-full p-3 border rounded-lg shadow-sm"
-            placeholder="Top text"
-            value={topText}
-            onChange={(e) => {
-              setTopText(e.target.value);
-              drawMeme(image, e.target.value, bottomText, fontSize);
-            }}
-          />
-
-          <input
-            className="w-full p-3 border rounded-lg shadow-sm"
-            placeholder="Bottom text"
-            value={bottomText}
-            onChange={(e) => {
-              setBottomText(e.target.value);
-              drawMeme(image, topText, e.target.value, fontSize);
-            }}
-          />
-
-          {/* Font Slider */}
-          <div>
-            <label className="font-medium">Font Size: {fontSize}px</label>
-            <input
-              type="range"
-              min="20"
-              max="120"
-              value={fontSize}
-              onChange={(e) => {
-                setFontSize(e.target.value);
-                drawMeme(image, topText, bottomText, parseInt(e.target.value));
-              }}
-              className="w-full accent-indigo-600"
-            />
-          </div>
-        </div>
-
-        {/* Canvas */}
-        <canvas
-          ref={canvasRef}
-          className="rounded-xl shadow-lg border max-w-full mb-4"
-        />
-
-        {image && (
-  <button
-    onClick={runFinalAction(downloadMeme)}
-    className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl text-lg font-semibold transition"
-  >
-    Download Meme
-  </button>
-)}
-
+              <div className="bg-gray-100 p-4 rounded-2xl shadow-inner flex items-center justify-center">
+                <canvas
+                  ref={canvasRef}
+                  className="rounded-lg shadow-lg border max-w-full h-auto"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </ToolLayout>

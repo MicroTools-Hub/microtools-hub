@@ -67,92 +67,104 @@ export default function ImageResizer() {
       />
 
       <ToolLayout>
-        <div className="min-h-screen bg-gray-50 pt-24 px-4 sm:px-6">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl font-bold text-indigo-600 mb-6 text-center sm:text-left">Image Resizer</h1>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-indigo-600 mb-8 text-center">Image Resizer</h1>
 
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => handleFile(e.target.files[0])}
-          className="mb-4"
-        />
+            {!file ? (
+              <div className="text-center">
+                <label className="inline-block bg-indigo-600 text-white px-8 py-4 rounded-lg text-xl font-bold cursor-pointer hover:bg-indigo-700 transition-all duration-300 ease-in-out transform hover:scale-105">
+                  Choose an Image
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleFile(e.target.files[0])}
+                    className="hidden"
+                  />
+                </label>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div className="text-center">
+                  <img src={URL.createObjectURL(file)} alt="Original" className="max-w-full h-auto rounded-lg shadow-lg mx-auto" />
+                  <p className="mt-4 text-lg font-semibold">Original: {originalSize?.width} x {originalSize?.height}</p>
+                </div>
+                
+                <div className="space-y-6 bg-white p-6 rounded-2xl shadow-lg border">
+                  <div>
+                    <label className="block font-semibold text-lg mb-2">Width (px)</label>
+                    <input
+                      type="number"
+                      value={imgSize.width}
+                      onChange={(e) => updateWidth(+e.target.value)}
+                      className="w-full p-3 border rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    />
+                    <input
+                      type="range"
+                      min="50"
+                      max={originalSize ? originalSize.width * 2 : 5000}
+                      value={imgSize.width}
+                      onChange={(e) => updateWidth(+e.target.value)}
+                      className="w-full mt-2 h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+                    />
+                  </div>
 
-        {originalSize && (
-          <>
-            {/* Width */}
-            <label className="block font-medium">
-              Width (px)
-            </label>
-            <input
-              type="number"
-              value={imgSize.width}
-              onChange={(e) => updateWidth(+e.target.value)}
-              className="w-full p-2 border rounded mb-2"
-            />
-            <input
-              type="range"
-              min="50"
-              max="5000"
-              value={imgSize.width}
-              onChange={(e) => updateWidth(+e.target.value)}
-              className="w-full mb-4"
-            />
+                  <div>
+                    <label className="block font-semibold text-lg mb-2">Height (px)</label>
+                    <input
+                      type="number"
+                      value={imgSize.height}
+                      onChange={(e) => updateHeight(+e.target.value)}
+                      className="w-full p-3 border rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    />
+                    <input
+                      type="range"
+                      min="50"
+                      max={originalSize ? originalSize.height * 2 : 5000}
+                      value={imgSize.height}
+                      onChange={(e) => updateHeight(+e.target.value)}
+                      className="w-full mt-2 h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+                    />
+                  </div>
 
-            {/* Height */}
-            <label className="block font-medium">
-              Height (px)
-            </label>
-            <input
-              type="number"
-              value={imgSize.height}
-              onChange={(e) => updateHeight(+e.target.value)}
-              className="w-full p-2 border rounded mb-2"
-            />
-            <input
-              type="range"
-              min="50"
-              max="5000"
-              value={imgSize.height}
-              onChange={(e) => updateHeight(+e.target.value)}
-              className="w-full mb-4"
-            />
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="checkbox"
+                      id="keepRatio"
+                      checked={keepRatio}
+                      onChange={(e) => setKeepRatio(e.target.checked)}
+                      className="h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500"
+                    />
+                    <label htmlFor="keepRatio" className="font-semibold text-lg">Keep Aspect Ratio</label>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            <div className="mt-8 text-center">
+              <button
+                onClick={resize}
+                disabled={!file}
+                className="bg-indigo-600 disabled:opacity-50 text-white px-10 py-4 rounded-lg text-xl font-bold hover:bg-indigo-700 transition-all duration-300 ease-in-out transform hover:scale-105"
+              >
+                Resize Image
+              </button>
+            </div>
 
-            {/* Aspect ratio toggle */}
-            <label className="flex items-center gap-2 mb-4">
-              <input
-                type="checkbox"
-                checked={keepRatio}
-                onChange={(e) => setKeepRatio(e.target.checked)}
-              />
-              Keep Aspect Ratio
-            </label>
-          </>
-        )}
-
-        <button
-          onClick={resize}
-          className="bg-indigo-600 text-white px-4 py-2 rounded"
-        >
-          Resize
-        </button>
-
-        {resultUrl && (
-          <button
-            onClick={runFinalAction(() => {
-              const a = document.createElement("a");
-              a.href = resultUrl;
-              a.download = "resized.jpg";
-              a.rel = "noopener";
-              document.body.appendChild(a);
-              a.click();
-              document.body.removeChild(a);
-            })}
-            className="block mt-4 bg-green-600 text-white px-4 py-2 rounded text-center"
-          >
-            Download Resized Image
-          </button>
-        )}
+            {resultUrl && (
+              <div className="mt-8 text-center">
+                <h2 className="text-3xl font-bold text-gray-800 mb-4">Resized Image</h2>
+                <img src={resultUrl} alt="Resized" className="max-w-full h-auto rounded-lg shadow-lg mx-auto" />
+                <p className="mt-4 text-lg font-semibold">New Size: {imgSize.width} x {imgSize.height}</p>
+                <a
+                  href={resultUrl}
+                  download="resized-image.jpg"
+                  className="mt-6 inline-block bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg text-xl font-bold shadow-lg transition-transform transform hover:scale-105"
+                >
+                  Download Resized Image
+                </a>
+              </div>
+            )}
           </div>
         </div>
       </ToolLayout>

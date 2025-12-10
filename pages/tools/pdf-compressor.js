@@ -131,103 +131,91 @@ export default function PDFCompressor() {
       />
 
       <ToolLayout>
-        <div className="min-h-screen bg-gray-50 pt-24 px-4 sm:px-6">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="max-w-3xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl font-bold text-indigo-600 mb-6 text-center sm:text-left">PDF Compressor</h1>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-indigo-600 mb-8 text-center">PDF Compressor</h1>
 
-        {/* Upload Box */}
-        <div
-          className={`p-8 border-2 rounded-xl bg-white shadow transition ${
-            dragging ? "border-indigo-600 bg-indigo-50" : "border-gray-300"
-          }`}
-          onDragOver={(e) => {
-            e.preventDefault();
-            setDragging(true);
-          }}
-          onDragLeave={() => setDragging(false)}
-          onDrop={handleDrop}
-        >
-          <p className="text-center text-gray-600 mb-3">Drag & drop your PDF here</p>
-          <p className="text-center text-gray-400 mb-4">or</p>
+            <div className="p-6 bg-white rounded-2xl shadow-lg border mb-8">
+              <h2 className="font-bold text-2xl text-indigo-600 mb-4">How It Works</h2>
+              <ul className="list-decimal ml-6 text-gray-700 text-lg leading-relaxed space-y-2">
+                <li><b>Upload or drag & drop</b> a PDF file into the area below.</li>
+                <li>Select a <b>compression level</b> (Medium is recommended for a good balance).</li>
+                <li>Click <b>Compress PDF</b> to start the optimization process.</li>
+                <li>Download your smaller, high-quality PDF.</li>
+              </ul>
+            </div>
 
-          <input
-            type="file"
-            accept="application/pdf"
-            onChange={(e) => setFile(e.target.files[0])}
-            className="block mx-auto"
-          />
-
-          {file && (
-            <p className="text-center mt-4 text-gray-700 font-medium">
-              Selected: {file.name} ({(file.size / 1024 / 1024).toFixed(2)} MB)
-            </p>
-          )}
-        </div>
-
-        {/* Compression Level */}
-        <div className="mt-6 bg-white p-5 rounded-xl border shadow space-y-3">
-          <label className="font-semibold text-gray-700">Compression Level:</label>
-
-          <select
-            value={level}
-            onChange={(e) => setLevel(e.target.value)}
-            className="border p-3 rounded-lg w-full"
-          >
-            <option value="low">{compressionLabels.low}</option>
-            <option value="medium">{compressionLabels.medium}</option>
-            <option value="high">{compressionLabels.high}</option>
-          </select>
-        </div>
-
-        {/* Compress Button */}
-        <button
-          onClick={uploadFile}
-          className="w-full mt-6 bg-indigo-600 text-white text-lg py-3 rounded-lg hover:bg-indigo-700 transition"
-        >
-          {loading ? "Compressing..." : "Compress PDF"}
-        </button>
-
-        {/* Status */}
-        {loading && (
-          <p className="mt-4 text-center text-gray-700 font-medium animate-pulse">
-            Optimizing your PDF...
-          </p>
-        )}
-
-        {/* Download */}
-        {downloadUrl && (
-          <div className="mt-6 text-center">
-            <button
-              onClick={runFinalAction(() => {
-                  const a = document.createElement("a");
-                  a.href = downloadUrl;
-                  a.download = "compressed.pdf";
-                  a.rel = "noopener";
-                  document.body.appendChild(a);
-                  a.click();
-                  document.body.removeChild(a);
-                })}
-              className="inline-block bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition"
+            <div
+              className={`border-4 border-dashed rounded-2xl p-8 sm:p-12 text-center transition-all duration-300 ${
+                dragging ? "border-indigo-600 bg-indigo-50" : "border-gray-300 bg-white"
+              }`}
+              onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
+              onDragLeave={() => setDragging(false)}
+              onDrop={handleDrop}
             >
-              Download Compressed PDF
-            </button>
-          </div>
-        )}
+              <div className="text-center">
+                <label className="text-2xl font-semibold text-gray-700 cursor-pointer">
+                  Drag & Drop PDF Here
+                  <input
+                    type="file"
+                    accept="application/pdf"
+                    onChange={(e) => setFile(e.target.files[0])}
+                    className="hidden"
+                  />
+                </label>
+                <p className="text-gray-500 mt-2">or click to browse</p>
+              </div>
+              {file && (
+                <p className="mt-4 text-lg text-gray-800 font-semibold">
+                  Selected: {file.name} ({(file.size / 1024 / 1024).toFixed(2)} MB)
+                </p>
+              )}
+            </div>
 
-        {/* Instructions */}
-        <section className="mt-12 bg-white border p-6 rounded-xl shadow">
-          <h2 className="text-2xl font-bold text-indigo-600 mb-4">
-            How to Use This PDF Compressor
-          </h2>
+            <div className="my-8 flex flex-col sm:flex-row items-center justify-center gap-6">
+              <div className="flex items-center gap-3">
+                <label className="font-semibold text-lg">Compression Level:</label>
+                <select
+                  value={level}
+                  onChange={(e) => setLevel(e.target.value)}
+                  className="border border-gray-300 p-3 rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option value="low">{compressionLabels.low}</option>
+                  <option value="medium">{compressionLabels.medium}</option>
+                  <option value="high">{compressionLabels.high}</option>
+                </select>
+              </div>
 
-          <ul className="list-disc ml-6 text-gray-700 leading-7">
-            <li>Upload a PDF or drag & drop it into the box.</li>
-            <li>Select your preferred compression level.</li>
-            <li>Click <strong>Compress PDF</strong>.</li>
-            <li>Download the optimized file instantly.</li>
-            <li>Your files are processed safely and auto-deleted.</li>
-          </ul>
-        </section>
+              <button
+                onClick={runFinalAction(uploadFile)}
+                disabled={loading || !file}
+                className="bg-indigo-600 disabled:opacity-50 text-white px-10 py-4 rounded-lg text-xl font-bold hover:bg-indigo-700 transition-all duration-300 ease-in-out transform hover:scale-105"
+              >
+                {loading ? "Compressing..." : "Compress PDF"}
+              </button>
+            </div>
+            
+            {loading && (
+              <p className="mt-4 text-center text-indigo-600 font-semibold animate-pulse text-lg">
+                Optimizing your PDF... this may take a moment.
+              </p>
+            )}
+
+            {downloadUrl && (
+              <div className="mt-8 text-center">
+                <button
+                  onClick={runFinalAction(() => {
+                    const a = document.createElement("a");
+                    a.href = downloadUrl;
+                    a.download = "compressed.pdf";
+                    a.click();
+                  })}
+                  className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg text-xl font-bold shadow-lg transition-transform transform hover:scale-105"
+                >
+                  Download Compressed PDF
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </ToolLayout>

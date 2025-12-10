@@ -12,6 +12,7 @@ export default function AIPFP() {
   const generate = async () => {
     if (!prompt || !prompt.trim()) return alert("Please enter a prompt");
     setLoading(true);
+    setJob(null);
     try {
       const res = await fetch(`${BACKEND}/api/ai-pfp`, {
         method: "POST",
@@ -34,28 +35,41 @@ export default function AIPFP() {
       <SEO title="AI PFP Maker — MicroTools Hub" description="Create AI profile pictures" />
 
       <ToolLayout>
-        <div className="min-h-screen bg-gray-50 pt-24 px-4 sm:px-6">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl font-bold text-indigo-600 mb-6 text-center sm:text-left">AI PFP Generator</h1>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-indigo-600 mb-8">AI PFP Generator</h1>
 
-            <textarea
-              value={prompt}
-              onChange={(e) => setPrompt(e.target.value)}
-              className="w-full max-w-full p-3 border rounded-lg min-h-[120px] focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            />
+            <div className="p-6 bg-white rounded-2xl shadow-lg border mb-8 text-left">
+                <h2 className="font-bold text-2xl text-indigo-600 mb-4">How It Works</h2>
+                <ul className="list-decimal ml-6 text-gray-700 text-lg leading-relaxed space-y-2">
+                    <li>Enter a descriptive prompt for your desired profile picture.</li>
+                    <li>Click the <b>Generate</b> button.</li>
+                    <li>Your AI-generated PFP will appear below.</li>
+                </ul>
+            </div>
 
-            <div className="mt-4">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <textarea
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                className="w-full p-4 border rounded-lg text-lg flex-grow focus:outline-none focus:ring-2 focus:ring-indigo-500 min-h-[120px]"
+                placeholder="Enter a prompt for your AI PFP"
+              />
               <button
                 onClick={runFinalAction(generate)}
-                className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg w-full sm:w-auto text-center transition"
+                className="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all duration-300 ease-in-out transform hover:scale-105"
                 disabled={loading}
               >
                 {loading ? "Generating…" : "Generate"}
               </button>
             </div>
 
+            {loading && <p className="mt-4 text-indigo-600 font-semibold animate-pulse">Generating your PFP...</p>}
+
             {job && (
-              <pre className="mt-4 p-3 bg-white rounded-2xl shadow-sm border overflow-auto">{JSON.stringify(job, null, 2)}</pre>
+              <div className="mt-8 bg-white rounded-2xl shadow-lg border overflow-hidden">
+                <pre className="p-4 text-sm overflow-auto">{JSON.stringify(job, null, 2)}</pre>
+              </div>
             )}
           </div>
         </div>
@@ -63,5 +77,3 @@ export default function AIPFP() {
     </>
   );
 }
-
-

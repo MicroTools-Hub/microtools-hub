@@ -71,87 +71,76 @@ export default function ShortsDownloader() {
       />
 
       <ToolLayout>
-        <div className="min-h-screen bg-gray-50 pt-24 px-4 sm:px-6">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="max-w-3xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl font-bold text-indigo-600 mb-6 text-center sm:text-left">YouTube Shorts Downloader</h1>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-indigo-600 mb-8 text-center">YouTube Shorts Downloader</h1>
 
-        {/* Instructions */}
-        <div className="p-4 bg-white border rounded-lg shadow mb-6">
-          <h2 className="font-semibold text-lg mb-2">How to Use</h2>
-          <ul className="list-disc ml-5 text-gray-700 space-y-1">
-            <li>Open YouTube Shorts and tap <strong>Share → Copy Link</strong></li>
-            <li>Paste the link in the box below</li>
-            <li>Click <strong>Fetch Video</strong></li>
-            <li>Choose your download quality (144p–1080p)</li>
-            <li>Download instantly in MP4 format</li>
-          </ul>
-        </div>
-
-        {/* URL Input */}
-        <input
-          className="w-full p-3 border rounded-lg shadow-sm mb-4 focus:ring focus:ring-indigo-300"
-          placeholder="Paste Shorts URL..."
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-        />
-
-        <button
-          onClick={fetchVideo}
-          className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:opacity-90 transition w-full sm:w-auto"
-        >
-          Fetch Video
-        </button>
-
-
-        {/* Error */}
-        {error && <p className="text-red-600 mt-4">{error}</p>}
-
-        {/* Loading Skeleton */}
-        {loading && (
-          <div className="mt-6 p-4 border rounded-lg bg-white shadow animate-pulse">
-            <div className="h-6 bg-gray-300 rounded w-3/4 mb-3"></div>
-            <div className="h-40 bg-gray-300 rounded mb-3"></div>
-            <div className="space-y-2">
-              <div className="h-10 bg-gray-300 rounded"></div>
-              <div className="h-10 bg-gray-300 rounded"></div>
-              <div className="h-10 bg-gray-300 rounded"></div>
+            <div className="p-6 bg-white rounded-2xl shadow-lg border mb-8">
+              <h2 className="font-bold text-2xl text-indigo-600 mb-4">How It Works</h2>
+              <ul className="list-decimal ml-6 text-gray-700 text-lg leading-relaxed space-y-2">
+                <li>Find a YouTube Short and tap <b>Share</b>, then <b>Copy Link</b>.</li>
+                <li>Paste the copied link into the input box below.</li>
+                <li>Click <b>Fetch Video</b> to get the download links.</li>
+                <li>Choose your desired quality (e.g., 1080p, 720p) and download.</li>
+              </ul>
             </div>
-          </div>
-        )}
 
-        {/* Result */}
-        {info && !error && (
-          <div className="mt-6 p-4 bg-white border rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-3">{info.title}</h2>
-
-            <img
-              src={info.thumbnail}
-              alt="thumbnail"
-              className="w-60 rounded mb-4 shadow"
-            />
-
-            <div className="space-y-3">
-              {resolutions.map((res) =>
-                info.links?.[res] ? (
-                  <button
-                    key={res}
-                    onClick={runFinalAction(() => {
-                      const a = document.createElement("a");
-                      a.href = info.links[res];
-                      a.rel = "noopener";
-                      document.body.appendChild(a);
-                      a.click();
-                      document.body.removeChild(a);
-                    })}
-                    className="block bg-gray-100 py-3 rounded-lg text-center border hover:bg-gray-200 transition font-medium"
-                  >
-                    Download {res}
-                  </button>
-                ) : null
-              )}
+            <div className="flex flex-col sm:flex-row gap-4 mb-8">
+              <input
+                className="w-full p-4 border rounded-lg text-lg flex-grow focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="Paste YouTube Shorts URL"
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+              />
+              <button
+                onClick={runFinalAction(fetchVideo)}
+                disabled={loading}
+                className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all duration-300 ease-in-out transform hover:scale-105"
+              >
+                {loading ? 'Fetching...' : 'Fetch Video'}
+              </button>
             </div>
-          </div>
-        )}
+
+            {error && <p className="text-red-500 text-center text-lg font-semibold">{error}</p>}
+
+            {loading && (
+              <div className="mt-8 p-6 border rounded-2xl bg-white shadow-lg animate-pulse">
+                <div className="h-8 bg-gray-300 rounded w-3/4 mb-4"></div>
+                <div className="h-48 bg-gray-300 rounded mb-4"></div>
+                <div className="space-y-3">
+                  <div className="h-12 bg-gray-300 rounded"></div>
+                  <div className="h-12 bg-gray-300 rounded"></div>
+                </div>
+              </div>
+            )}
+
+            {info && !error && (
+              <div className="mt-8 p-6 bg-white border rounded-2xl shadow-2xl">
+                <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-800">{info.title}</h2>
+                <div className="flex flex-col md:flex-row gap-6">
+                  <img
+                    src={info.thumbnail}
+                    alt="Video Thumbnail"
+                    className="w-full md:w-64 h-auto rounded-lg shadow-md"
+                  />
+                  <div className="flex-grow space-y-3">
+                    {resolutions.map((res) =>
+                      info.links?.[res] ? (
+                        <a
+                          key={res}
+                          href={info.links[res]}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block bg-green-500 hover:bg-green-600 text-white py-3 px-6 rounded-lg text-center text-lg font-semibold transition-transform transform hover:scale-105"
+                        >
+                          Download {res}
+                        </a>
+                      ) : null
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </ToolLayout>
