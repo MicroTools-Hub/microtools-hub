@@ -84,7 +84,7 @@ export default function YouTubeDownloader() {
                 className="w-full p-4 border rounded-lg text-lg flex-grow focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
               <button
-                onClick={fetchVideo}
+                onClick={runFinalAction(fetchVideo)}
                 disabled={loading}
                 className="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all duration-300 ease-in-out transform hover:scale-105"
               >
