@@ -2,6 +2,7 @@
 import { useState } from "react";
 import SEO from "../../components/SEO";
 import ToolLayout from "../../components/ToolLayout";
+import { runFinalAction } from "../../utils/finalAction";
 
 
 export default function ImageResizer() {
@@ -70,6 +71,11 @@ export default function ImageResizer() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-indigo-600 mb-8 text-center">Image Resizer</h1>
+
+            <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6 rounded-md shadow-sm" role="alert">
+              <p className="font-bold">Important Notice:</p>
+              <p className="text-sm">To support our free tools, clicking a button that performs a final action (like Compress, Download, or Convert) may open a sponsored advertisement in a new tab. Simply close the ad tab or navigate back to continue your task here.</p>
+            </div>
 
             {!file ? (
               <div className="text-center">
@@ -143,7 +149,7 @@ export default function ImageResizer() {
             
             <div className="mt-8 text-center">
               <button
-                onClick={resize}
+                onClick={runFinalAction(resize)}
                 disabled={!file}
                 className="bg-indigo-600 disabled:opacity-50 text-white px-10 py-4 rounded-lg text-xl font-bold hover:bg-indigo-700 transition-all duration-300 ease-in-out transform hover:scale-105"
               >
@@ -156,13 +162,17 @@ export default function ImageResizer() {
                 <h2 className="text-3xl font-bold text-gray-800 mb-4">Resized Image</h2>
                 <img src={resultUrl} alt="Resized" className="max-w-full h-auto rounded-lg shadow-lg mx-auto" />
                 <p className="mt-4 text-lg font-semibold">New Size: {imgSize.width} x {imgSize.height}</p>
-                <a
-                  href={resultUrl}
-                  download="resized-image.jpg"
+                <button
+                  onClick={runFinalAction(() => {
+                    const a = document.createElement("a");
+                    a.href = resultUrl;
+                    a.download = "resized-image.jpg";
+                    a.click();
+                  })}
                   className="mt-6 inline-block bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg text-xl font-bold shadow-lg transition-transform transform hover:scale-105"
                 >
                   Download Resized Image
-                </a>
+                </button>
               </div>
             )}
           </div>

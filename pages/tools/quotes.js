@@ -217,6 +217,11 @@ export default function QuoteGenerator() {
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-indigo-600 mb-8">Random Quote Generator</h1>
 
+            <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6 rounded-md shadow-sm" role="alert">
+              <p className="font-bold">Important Notice:</p>
+              <p className="text-sm">To support our free tools, clicking a button that performs a final action (like Compress, Download, or Convert) may open a sponsored advertisement in a new tab. Simply close the ad tab or navigate back to continue your task here.</p>
+            </div>
+
             <div className="p-6 bg-white rounded-2xl shadow-lg border mb-8">
               <h2 className="font-bold text-2xl text-indigo-600 mb-4">How It Works</h2>
               <ul className="list-decimal ml-6 text-gray-700 text-lg leading-relaxed space-y-2">
